@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Hướng dẫn phân loại rác{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">♻ Hướng Dẫn Phân Loại Rác</h2>
+
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card shadow-sm p-4 text-center">
+                <i class="fa-solid fa-leaf fa-3x text-success mb-3"></i>
+                <h5>Rác hữu cơ</h5>
+                <p>Thức ăn thừa, rau củ, vỏ trái cây</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-4 text-center">
+                <i class="fa-solid fa-recycle fa-3x text-primary mb-3"></i>
+                <h5>Rác tái chế</h5>
+                <p>Chai nhựa, giấy, lon nhôm</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-4 text-center">
+                <i class="fa-solid fa-ban fa-3x text-secondary mb-3"></i>
+                <h5>Rác vô cơ</h5>
+                <p>Gốm sứ, vải bẩn</p>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm p-4 text-center">
+                <i class="fa-solid fa-triangle-exclamation fa-3x text-danger mb-3"></i>
+                <h5>Rác nguy hại</h5>
+                <p>Pin, bóng đèn, hóa chất</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
