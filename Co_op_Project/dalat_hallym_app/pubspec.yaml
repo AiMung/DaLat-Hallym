@@ -49,10 +49,12 @@ dev_dependencies:
   # 카메라 사용과 서버통신
   flutter:
     sdk: flutter
+  fl_chart: ^0.66.0  # 그래프 구현용
   camera: ^0.11.0          # 카메라 제어
   http: ^1.1.0            # Flask 서버와 통신
   path_provider: ^2.1.0   # 사진 임시 저장
   path: ^1.8.3            # 경로 처리
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
