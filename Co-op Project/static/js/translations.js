@@ -170,3 +170,143 @@ const translations = {
     "footer.copyright": "© 2025 Green Spring Project. 환경 보호 – 모두의 책임입니다."
   }
 };
+// ============================================
+// FILE: static/js/translations.js
+// Dữ liệu dịch Việt - Hàn
+// ============================================
+
+const translations = {
+  vi: {
+    // HEADER
+    nav_about: "Giới thiệu",
+    nav_stats: "Thống kê",
+    nav_features: "Tính năng",
+    nav_demo: "Demo",
+    nav_testimonials: "Đánh giá",
+    nav_contact: "Liên hệ",
+    nav_app: "Mở App",
+    
+    // HERO SECTION
+    hero_title_1: "Nước thượng nguồn trong",
+    hero_title_2: "Thành phố sạch bền vững",
+    hero_subtitle: "Dự án hợp tác quốc tế giữa Đại học Đà Lạt và Hallym University (Hàn Quốc) – nghiên cứu phân loại, phân tích và xử lý rác thải đúng quy định, hướng tới môi trường cao nguyên trong lành và bền vững.",
+    hero_btn_demo: "Thử ngay Demo",
+    hero_btn_learn: "Xem Video",
+    badge_1: "Phân loại tại nguồn",
+    badge_2: "Ủ phân hữu cơ",
+    badge_3: "Tuân thủ Luật 2025",
+    
+    // VIDEO SECTION
+    video_title: "Xem Green Spring hoạt động",
+    video_subtitle: "Demo 90 giây về web app - Từ phân loại đến thu gom",
+    video_btn: "Trải nghiệm ngay",
+    
+    // STATS SECTION
+    stats_title: "Thống kê dự án",
+    stats_subtitle: "Kết quả đạt được sau 24 tháng triển khai",
+    stats_label_1: "Kg rác đã phân loại",
+    stats_label_2: "Người tham gia",
+    stats_label_3: "% Giảm rác thải",
+    stats_label_4: "Tháng hoạt động",
+    
+    // TIMELINE SECTION
+    timeline_title: "Hành trình 24 tháng",
+    timeline_subtitle: "Từ ý tưởng đến hiện thực - Câu chuyện phát triển dự án",
+    timeline_cta: "Trải nghiệm ngay",
+    
+    // TEAM SECTION
+    team_title: "Đội ngũ thực hiện",
+    team_subtitle: "Những người đứng sau thành công của Green Spring",
+    team_cta: "Hợp tác với chúng tôi",
+    
+    // FAQ SECTION
+    faq_title: "Câu hỏi thường gặp",
+    faq_subtitle: "Giải đáp mọi thắc mắc về Green Spring",
+    faq_cta_text: "Không tìm thấy câu trả lời? Chúng tôi luôn sẵn sàng hỗ trợ!",
+    faq_cta_btn: "Liên hệ với chúng tôi",
+    
+    // FEATURES SECTION
+    features_title: "Tại sao chọn Green Spring?",
+    features_subtitle: "Dự án kết hợp tri thức từ hai trường đại học, mang đến giải pháp toàn diện cho vấn đề rác thải tại Đà Lạt – thành phố du lịch và thượng nguồn của nhiều dòng nước.",
+    
+    // CTA SECTION
+    cta_title: "Sẵn sàng tạo thay đổi?",
+    cta_subtitle: "Tham gia 567+ người đang xây dựng Đà Lạt xanh",
+    cta_btn_1: "Bắt đầu ngay",
+    cta_btn_2: "Đặt lịch tư vấn",
+    
+    // CONTACT SECTION
+    contact_title: "Liên hệ & Hợp tác",
+    contact_subtitle: "Chúng tôi luôn chào đón sự hợp tác từ các trường đại học, tổ chức môi trường và cộng đồng.",
+    
+    // FOOTER
+    footer_tagline: "Từ nguồn trong đến thành phố sạch",
+  },
+  
+  ko: {
+    // HEADER
+    nav_about: "소개",
+    nav_stats: "통계",
+    nav_features: "기능",
+    nav_demo: "데모",
+    nav_testimonials: "리뷰",
+    nav_contact: "연락처",
+    nav_app: "앱 열기",
+    
+    // HERO SECTION
+    hero_title_1: "깨끗한 수원",
+    hero_title_2: "지속 가능한 도시",
+    hero_subtitle: "달랏대학교와 한림대학교(한국)의 국제 협력 프로젝트 – 규정에 따른 쓰레기 분류, 분석 및 처리 연구, 고원 환경의 청결하고 지속 가능한 발전을 목표로 합니다.",
+    hero_btn_demo: "데모 시도",
+    hero_btn_learn: "동영상 보기",
+    badge_1: "발생원 분리수거",
+    badge_2: "유기농 퇴비",
+    badge_3: "2025년 법률 준수",
+    
+    // VIDEO SECTION
+    video_title: "Green Spring 작동 방식",
+    video_subtitle: "웹 앱 90초 데모 - 분류부터 수거까지",
+    video_btn: "지금 체험하기",
+    
+    // STATS SECTION
+    stats_title: "프로젝트 통계",
+    stats_subtitle: "24개월 시행 후 결과",
+    stats_label_1: "분류된 쓰레기 (Kg)",
+    stats_label_2: "참가자",
+    stats_label_3: "% 폐기물 감소",
+    stats_label_4: "운영 개월",
+    
+    // TIMELINE SECTION
+    timeline_title: "24개월의 여정",
+    timeline_subtitle: "아이디어에서 현실까지 - 프로젝트 개발 이야기",
+    timeline_cta: "지금 체험하기",
+    
+    // TEAM SECTION
+    team_title: "실행 팀",
+    team_subtitle: "Green Spring의 성공을 뒷받침하는 사람들",
+    team_cta: "협력하기",
+    
+    // FAQ SECTION
+    faq_title: "자주 묻는 질문",
+    faq_subtitle: "Green Spring에 대한 모든 질문 해결",
+    faq_cta_text: "답변을 찾지 못하셨나요? 언제든지 도와드리겠습니다!",
+    faq_cta_btn: "문의하기",
+    
+    // FEATURES SECTION
+    features_title: "왜 Green Spring을 선택해야 하나요?",
+    features_subtitle: "두 대학의 지식을 결합하여 달랏의 폐기물 문제에 대한 포괄적인 솔루션 제공 – 관광 도시이자 많은 강의 상류.",
+    
+    // CTA SECTION
+    cta_title: "변화를 만들 준비가 되셨나요?",
+    cta_subtitle: "달랏을 녹색으로 만들고 있는 567명 이상과 함께하세요",
+    cta_btn_1: "지금 시작",
+    cta_btn_2: "상담 예약",
+    
+    // CONTACT SECTION
+    contact_title: "연락 및 협력",
+    contact_subtitle: "대학, 환경 단체 및 커뮤니티의 협력을 항상 환영합니다.",
+    
+    // FOOTER
+    footer_tagline: "깨끗한 수원에서 깨끗한 도시로",
+  }
+};

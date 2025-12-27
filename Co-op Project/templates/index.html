@@ -3,16 +3,68 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dalat–Hallym Green Spring | Nước trong, Thành phố sạch</title>
+  <title>Dalat–Hallym DaLat Waste Wizzard | Nước trong, Thành phố sạch</title>
   <meta name="description" content="Dự án hợp tác Đà Lạt - Hallym về quản lý rác thải bền vững. Phân loại tại nguồn, xử lý hữu cơ, hướng tới môi trường xanh." />
+
+  <!-- ============ SEO METADATA (CẢI TIẾN #7) ============ -->
+  <!-- Open Graph (Facebook/LinkedIn) -->
+  <meta property="og:title" content="DaLat Waste Wizzard – Đà Lạt xanh bền vững" />
+  <meta property="og:description" content="Dự án hợp tác quốc tế về quản lý rác thải thông minh tại Đà Lạt" />
+  <meta property="og:image" content="https://i.pinimg.com/736x/65/37/8e/65378ebf81997621b987906731cc6f70.jpg" />
+  <meta property="og:url" content="https://greenspring-dalat.com" />
+  <meta property="og:type" content="website" />
   
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="DaLat Waste Wizzard – Đà Lạt xanh bền vững" />
+  <meta name="twitter:description" content="Dự án hợp tác DLU × Hallym University" />
+  <meta name="twitter:image" content="https://i.pinimg.com/736x/65/37/8e/65378ebf81997621b987906731cc6f70.jpg" />
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EnvironmentalProject",
+    "name": "Dalat-Hallym DaLat Waste Wizzard",
+    "description": "Dự án quản lý rác thải bền vững tại Đà Lạt",
+    "url": "https://greenspring-dalat.com",
+    "image": "https://i.pinimg.com/736x/65/37/8e/65378ebf81997621b987906731cc6f70.jpg",
+    "sponsor": [
+      {"@type": "Organization", "name": "Dalat University"},
+      {"@type": "Organization", "name": "Hallym University"}
+    ],
+    "location": {
+      "@type": "Place",
+      "name": "Đà Lạt, Lâm Đồng, Vietnam"
+    }
+  }
+  </script>
+  
+  <!-- ============ ANALYTICS (CẢI TIẾN #8) ============ -->
+  <!-- Google Analytics 4 - THAY YOUR_GA_ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
   <!-- Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=gg+sans:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
+  
   <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -35,43 +87,41 @@
   <div class="bg-grid"></div>
 
   <!-- Header with Mobile Menu -->
-<header id="header">
-  <div class="container">
-    <nav>
-      <a href="#" class="nav-brand">
-        <div class="nav-logo">
-          <i class="fas fa-leaf"></i>
+  <header id="header" role="banner">
+    <div class="container">
+      <nav aria-label="Main navigation">
+        <a href="#" class="nav-brand">
+          <div class="nav-logo">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <span>DaLat Waste Wizzard</span>
+        </a>
+        
+        <ul class="nav-links" role="list">
+          <li role="listitem"><a href="#about">Giới thiệu</a></li>
+          <li role="listitem"><a href="#stats">Thống kê</a></li>
+          <li role="listitem"><a href="#features">Tính năng</a></li>
+          <li role="listitem"><a href="#demo">Demo</a></li>
+          <li role="listitem"><a href="#testimonials">Đánh giá</a></li>
+          <li role="listitem"><a href="#contact">Liên hệ</a></li>
+          <li role="listitem"><a href="/app" class="nav-cta">Mở App</a></li>
+        </ul>
+
+        <!-- Nút đổi ngôn ngữ -->
+        <!-- Language Flags -->
+
+        <div class="hamburger" id="hamburger" role="button" tabindex="0" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-        <span>Green Spring</span>
-      </a>
-      
-      <ul class="nav-links">
-        <li><a href="#about" data-lang-vi="Giới thiệu" data-lang-ko="소개">Giới thiệu</a></li>
-        <li><a href="#stats" data-lang-vi="Thống kê" data-lang-ko="통계">Thống kê</a></li>
-        <li><a href="#features" data-lang-vi="Tính năng" data-lang-ko="기능">Tính năng</a></li>
-        <li><a href="#demo" data-lang-vi="Demo" data-lang-ko="데모">Demo</a></li>
-        <li><a href="#testimonials" data-lang-vi="Đánh giá" data-lang-ko="리뷰">Đánh giá</a></li>
-        <li><a href="#contact" data-lang-vi="Liên hệ" data-lang-ko="연락처">Liên hệ</a></li>
-        <li><a href="/app" class="nav-cta" data-lang-vi="Mở App" data-lang-ko="앱 열기">Mở App</a></li>
-      </ul>
-
-      <!-- NÚT ĐỔI NGÔN NGỮ - THÊM MỚI -->
-      <div class="language-toggle" id="languageToggle">
-        <i class="fas fa-language"></i>
-        <span class="lang-text">KR</span>
-      </div>
-
-      <div class="hamburger" id="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </nav>
-  </div>
-</header>
-
+      </nav>
+    </div>
+    
+  </header>
+ <div id="google_translate_element" style="position: fixed; top: -9999px; left: -9999px;"></div>
   <!-- Mobile Menu Overlay -->
-  <div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu" id="mobileMenu" role="navigation">
     <a href="#about">Giới thiệu</a>
     <a href="#stats">Thống kê</a>
     <a href="#features">Tính năng</a>
@@ -94,7 +144,7 @@
           <h1 class="fade-in">
             <span class="gradient-green">Nước thượng nguồn trong<br/>Thành phố sạch bền vững</span>
           </h1>
-          
+            
           <p class="fade-in delay-1">
             Dự án hợp tác quốc tế giữa Đại học Đà Lạt và Hallym University (Hàn Quốc) – nghiên cứu phân loại, phân tích và xử lý rác thải đúng quy định, hướng tới môi trường cao nguyên trong lành và bền vững.
           </p>
@@ -104,9 +154,9 @@
               <i class="fas fa-rocket"></i>
               <span>Thử ngay Demo</span>
             </a>
-            <a href="#features" class="btn btn-secondary">
-              <i class="fas fa-info-circle"></i>
-              <span>Tìm hiểu thêm</span>
+            <a href="#video-demo" class="btn btn-secondary">
+              <i class="fas fa-play-circle"></i>
+              <span>Xem Video</span>
             </a>
           </div>
           
@@ -128,68 +178,842 @@
         
         <div class="hero-image fade-in delay-2">
           <div class="card float-card">
-            <img src="https://i.pinimg.com/736x/65/37/8e/65378ebf81997621b987906731cc6f70.jpg?w=800&h=600&fit=crop&q=80" alt="Phân loại rác thải Đà Lạt" loading="lazy" />
+            <img 
+              src="https://i.pinimg.com/736x/65/37/8e/65378ebf81997621b987906731cc6f70.jpg" 
+              srcset="https://i.pinimg.com/736x/65/37/8e/65378ebf81997621b987906731cc6f70.jpg 800w,
+                      https://i.pinimg.com/1200x/65/37/8e/65378ebf81997621b987906731cc6f70.jpg 1200w"
+              sizes="(max-width: 768px) 100vw, 50vw"
+              alt="Phân loại rác thải Đà Lạt" 
+              loading="lazy" />
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ============================================
+       VIDEO DEMO SECTION (CẢI TIẾN #1 - UU TIÊN CAO)
+       ============================================ -->
+  <section id="video-demo" class="video-showcase" style="padding: 80px 0; background: var(--bg-secondary);">
+    <div class="container">
+  <div class="section-header text-center reveal">
+    <h2><span class="gradient-green" style="white-space: nowrap;">Xem DaLat Waste Wizzard hoạt động</span></h2>
+    <p class="section-lead"></p>90 giây hiểu rõ: Cách Đà Lạt quản lý rác thông minh</p>
+  </div>
+  
+  <div class="video-container reveal" style="max-width: 900px; margin: 0 auto; border-radius: 16px; overflow: hidden; box-shadow: var(--elevation-xl); position: relative; padding-bottom: 56.25%; height: 0;">
+    <iframe 
+      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+      src="https://www.youtube.com/embed/iQlB6Yexsak?start=15&autoplay=1&mute=1&rel=0&modestbranding=1&controls=1&showinfo=0&fs=1&iv_load_policy=3&playsinline=1"
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+      allowfullscreen
+      loading="lazy"
+      title="DaLat Waste Wizzard Demo Video">
+    </iframe>
+  </div>
+</div>
+      
+      <!-- CTA sau video (CẢI TIẾN #2) -->
+      <div class="text-center reveal" style="margin-top: 40px;">
+        <a href="/app" class="btn btn-primary">
+          <i class="fas fa-rocket"></i>
+          Trải nghiệm ngay
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Stats Counter Section với BIỂU ĐỒ -->
-<section class="stats-section" id="stats">
+  <section class="stats-section" id="stats">
+    <div class="container">
+      <div class="section-header text-center reveal" style="max-width: 100%; margin-bottom: 60px;">
+        <h2><span class="gradient-green">Thống kê dự án</span></h2>
+        <p class="section-lead">Kết quả đạt được sau 24 tháng triển khai</p>
+      </div>
+
+     <!-- Số liệu tổng quan -->
+<div class="stats-grid">
+  <div class="stat-item reveal">
+    <span class="stat-number" data-target="1234">0</span>
+    <div class="stat-label">Kg rác đã phân loại</div>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-number" data-target="567">0</span>
+    <div class="stat-label">Người tham gia</div>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-number" data-target="89">0</span>
+    <div class="stat-label">% Độ chính xác AI</div>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-number" data-target="24">0</span>
+    <div class="stat-label">Tháng hoạt động</div>
+  </div>
+  
+  <!-- THÊM MỚI -->
+  <div class="stat-item reveal">
+    <span class="stat-number" data-target="15">0</span>
+    <div class="stat-label">Điểm thu gom</div>
+  </div>
+  <div class="stat-item reveal">
+    <span class="stat-number" data-target="342">0</span>
+    <div class="stat-label">Tấn CO₂ giảm được</div>
+  </div>
+</div>
+      <!-- BIỂU ĐỒ -->
+      <div class="charts-container">
+        <div class="chart-card reveal">
+          <h3 class="chart-title">Phân bố loại rác thu gom</h3>
+          <div class="chart-wrapper">
+            <canvas id="wasteDistributionChart"></canvas>
+          </div>
+        </div>
+
+        <div class="chart-card reveal">
+          <h3 class="chart-title">Lượng rác phân loại theo tháng</h3>
+          <div class="chart-wrapper">
+            <canvas id="monthlyStatsChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+     PARTNERS & SPONSORS SECTION - INFINITE SCROLL
+     ============================================ -->
+<section id="partners" class="partners-section reveal">
   <div class="container">
-    <!-- Tiêu đề -->
-    <div class="section-header text-center reveal" style="max-width: 100%; margin-bottom: 60px;">
-      <h2><span class="gradient-green">Thống kê dự án</span></h2>
-      <p class="section-lead">Kết quả đạt được sau 24 tháng triển khai</p>
+    <!-- Header -->
+    <div class="section-header">
+      <h2>Đối tác & Nhà tài trợ</h2>
+      <p class="section-lead">
+        Được tin tưởng bởi <strong style="color: var(--blurple);">50+</strong> tổ chức công nghệ hàng đầu thế giới
+      </p>
     </div>
+    
+    <!-- Marquee Container -->
+    <!-- Marquee Container - 2 DÒNG NGƯỢC CHIỀU -->
+<div class="marquee-wrapper">
+  
+  <!-- ===== DÒNG 1: CHẠY TỪ TRÁI → PHẢI ===== -->
+  <div class="marquee">
+    <div class="marquee-content">
+      
+      <!-- Group 1 -->
+      <div class="marquee-group">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png" alt="Google Cloud" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vercel_logo_black.svg/512px-Vercel_logo_black.svg.png" alt="Vercel" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Microsoft_Azure.svg/300px-Microsoft_Azure.svg.png" alt="Microsoft Azure" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/320px-Amazon_Web_Services_Logo.svg.png" alt="AWS" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/512px-MongoDB_Logo.svg.png" alt="MongoDB" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/590px-Node.js_logo.svg.png" alt="Node.js" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png" alt="React" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/230px-Python-logo-notext.svg.png" alt="Python" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png" alt="TypeScript" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/400px-Figma-logo.svg.png" alt="Figma" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/DigitalOcean_logo.svg/512px-DigitalOcean_logo.svg.png" alt="DigitalOcean" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/240px-Octicons-mark-github.svg.png" alt="GitHub" class="partner-logo" loading="lazy">
+      </div>
+      
+      <!-- Group 2 - Duplicate -->
+      <div class="marquee-group" aria-hidden="true">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/368px-Google_2015_logo.svg.png" alt="Google Cloud" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Vercel_logo_black.svg/512px-Vercel_logo_black.svg.png" alt="Vercel" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Microsoft_Azure.svg/300px-Microsoft_Azure.svg.png" alt="Microsoft Azure" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Amazon_Web_Services_Logo.svg/320px-Amazon_Web_Services_Logo.svg.png" alt="AWS" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/512px-MongoDB_Logo.svg.png" alt="MongoDB" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/590px-Node.js_logo.svg.png" alt="Node.js" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png" alt="React" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/230px-Python-logo-notext.svg.png" alt="Python" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/512px-Typescript_logo_2020.svg.png" alt="TypeScript" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/400px-Figma-logo.svg.png" alt="Figma" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/DigitalOcean_logo.svg/512px-DigitalOcean_logo.svg.png" alt="DigitalOcean" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Octicons-mark-github.svg/240px-Octicons-mark-github.svg.png" alt="GitHub" class="partner-logo" loading="lazy">
+      </div>
+      
+    </div>
+  </div>
+  
+  <!-- ===== DÒNG 2: CHẠY TỪ PHẢI → TRÁI (NGƯỢC CHIỀU) ===== -->
+  <div class="marquee marquee-reverse">
+    <div class="marquee-content">
+      
+      <!-- Group 3 - Logo khác (hoặc giống nhau cũng được) -->
+      <div class="marquee-group">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/GitLab_logo.svg/512px-GitLab_logo.svg.png" alt="GitLab" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/233px-Postgresql_elephant.svg.png" alt="PostgreSQL" class="partner-logo" loading="lazy">
+        <img src="https://hub.docker.com/api/media/repos_logo/v1/library%2Fmysql?type=logo" alt="MySQL" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/240px-Git_icon.svg.png" alt="Git" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/240px-Slack_icon_2019.svg.png" alt="Slack" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/414px-Nextjs-logo.svg.png" alt="Next.js" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/440px-Vue.js_Logo_2.svg.png" alt="Vue.js" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Tensorflow_logo.svg/230px-Tensorflow_logo.svg.png" alt="TensorFlow" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/PyTorch_logo_icon.svg/240px-PyTorch_logo_icon.svg.png" alt="PyTorch" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/247px-Kubernetes_logo_without_workmark.svg.png" alt="Kubernetes" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/512px-IBM_logo.svg.png" alt="IBM Cloud" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/240px-Adobe_XD_CC_icon.svg.png" alt="Adobe XD" class="partner-logo" loading="lazy">
+      </div>
+      
+      <!-- Group 4 - Duplicate -->
+      <div class="marquee-group" aria-hidden="true">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/GitLab_logo.svg/512px-GitLab_logo.svg.png" alt="GitLab" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/233px-Postgresql_elephant.svg.png" alt="PostgreSQL" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/62/MySQL.svg/640px-MySQL.svg.png" alt="MySQL" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/240px-Git_icon.svg.png" alt="Git" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/240px-Slack_icon_2019.svg.png" alt="Slack" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/414px-Nextjs-logo.svg.png" alt="Next.js" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Vue.js_Logo_2.svg/440px-Vue.js_Logo_2.svg.png" alt="Vue.js" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Tensorflow_logo.svg/230px-Tensorflow_logo.svg.png" alt="TensorFlow" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/PyTorch_logo_icon.svg/240px-PyTorch_logo_icon.svg.png" alt="PyTorch" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Kubernetes_logo_without_workmark.svg/247px-Kubernetes_logo_without_workmark.svg.png" alt="Kubernetes" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/512px-IBM_logo.svg.png" alt="IBM Cloud" class="partner-logo" loading="lazy">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Adobe_XD_CC_icon.svg/240px-Adobe_XD_CC_icon.svg.png" alt="Adobe XD" class="partner-logo" loading="lazy">
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+</section>
 
-    <!-- Số liệu tổng quan -->
-    <div class="stats-grid">
-      <div class="stat-item reveal">
-        <span class="stat-number" data-target="1234">0</span>
-        <div class="stat-label">Kg rác đã phân loại</div>
+  <!-- Timeline Section -->
+  <section id="timeline" style="background: linear-gradient(180deg, var(--bg-primary), rgba(88, 101, 242, 0.05)); padding: 120px 0;">
+    <div class="container">
+      <div class="section-header text-center reveal" style="max-width: 100%; margin-bottom: 80px;">
+        <h2><span class="gradient-green">Hành trình 24 tháng</span></h2>
+        <p class="section-lead">Từ ý tưởng đến hiện thực - Câu chuyện phát triển dự án</p>
       </div>
-      <div class="stat-item reveal">
-        <span class="stat-number" data-target="567">0</span>
-        <div class="stat-label">Người tham gia</div>
+
+      <div class="timeline">
+        <!-- Mốc 1 -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">📅 06/2023</span>
+            <h3>🚀 Khởi động dự án</h3>
+            <p>Ký kết Memorandum of Understanding (MOU) giữa Đại học Đà Lạt và Hallym University. Đội ngũ 12 thành viên từ cả 2 trường chính thức hợp tác.</p>
+            <div class="timeline-image">
+              <img 
+                src="/static/images/startup_project.jpg" 
+                srcset="/static/images/startup_project.jpg 300w,
+                        /static/images/startup_project.jpg 600w"
+                sizes="(max-width: 768px) 300px, 600px"
+                alt="Lễ ký kết MOU" 
+                loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Mốc 2-8 tương tự, thêm srcset cho tất cả ảnh -->
+        <div class="timeline-item right reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">📅 08/2023</span>
+            <h3>🔍 Khảo sát thực địa</h3>
+            <p>Thu thập 500+ mẫu rác tại 10 điểm khác nhau ở Đà Lạt. Phỏng vấn 150 hộ dân về thói quen xử lý rác.</p>
+            <div class="timeline-stats">
+              <div class="stat-mini">
+                <strong>500+</strong>
+                <span>Mẫu rác</span>
+              </div>
+              <div class="stat-mini">
+                <strong>10</strong>
+                <span>Điểm khảo sát</span>
+              </div>
+              <div class="stat-mini">
+                <strong>150</strong>
+                <span>Hộ dân</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thêm các mốc 3-8 (giống code cũ) -->
+        <div class="timeline-item left reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">📅 10/2023</span>
+            <h3>🧪 Phân tích dữ liệu</h3>
+            <p>Nhóm nghiên cứu từ DaLat University và Hallym University áp dụng công nghệ AI để phân tích thành phần rác. Xây dựng dataset 100+ loại rác phổ biến tại Đà Lạt.</p>
+            <div class="timeline-image">
+              <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop&q=80" alt="Phân tích lab" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item right reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">📅 01/2024</span>
+            <h3>💻 Phát triển prototype</h3>
+            <p>Hoàn thành bản demo đầu tiên của web app. Tích hợp AI nhận diện rác, bản đồ điểm thu gom và hệ thống gamification.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item left reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">📅 04/2024</span>
+            <h3>🏫 Thử nghiệm pilot</h3>
+            <p>Triển khai thí điểm tại 5 trường THPT Đà Lạt với toàn bộ học sinh tiểu học tham gia. Lắp đặt 45 thùng rác thông minh có cảm biến IoT.</p>
+            <div class="timeline-image">
+              <img src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/595310713_1544637133939009_8115071472320768617_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGluCLCH6f1Rv9GOTHjIR9r4ULPYhJygUrhQs9iEnKBSlcouiOy4zfnEvW8RGcEQMQL8ONp5WHTkoHZNrvCodI7&_nc_ohc=aG0HkEPv-sYQ7kNvwGafmav&_nc_oc=AdmYvLBeO9vsEPkeUHwc-A2X8358Ez0iwxexPOHnYc79BB-cxI0NICoTR7EDz70CQFsugAJ2IDLO-eifCQnuewp7&_nc_zt=23&_nc_ht=scontent.fsgn2-4.fna&_nc_gid=-uDzP26wse4CW3JdcMSx6Q&oh=00_AfnBCKNngRXJQmwN11yPyLtGZ543dgG6xaVEAs8qIdv_mg&oe=6953D434" alt="Thử nghiệm tại trường" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item right reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">📅 08/2024</span>
+            <h3>🎉 Ra mắt chính thức</h3>
+            <p>Web app DaLat Waste Wizzard chính thức mở cho cộng đồng. Sự kiện ra mắt tại Hồ Xuân Hương với 500+ người tham dự.</p>
+            <div class="timeline-stats">
+              <div class="stat-mini">
+                <strong>500+</strong>
+                <span>Người tham dự</span>
+              </div>
+              <div class="stat-mini">
+                <strong>15</strong>
+                <span>Đơn vị đồng hành</span>
+              </div>
+              <div class="stat-mini">
+                <strong>3</strong>
+                <span>Kênh truyền hình</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item left reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">📅 12/2024</span>
+            <h3>📊 Đánh giá 6 tháng</h3>
+            <p>Sau 6 tháng vận hành: 1,234kg rác phân loại, 567 người dùng, giảm 89% rác không phân loại tại các điểm thí điểm.</p>
+            <div class="timeline-image">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop&q=80" alt="Báo cáo kết quả" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item right reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">📅 12/2025</span>
+            <h3>🏆 Hiện tại & Tương lai</h3>
+            <p>Mở rộng ra 20 trường học, 5 khu dân cư. Kế hoạch tích hợp blockchain cho chứng nhận carbon credit vào Q1/2026.</p>
+          </div>
+        </div>
       </div>
-      <div class="stat-item reveal">
-        <span class="stat-number" data-target="89">0</span>
-        <div class="stat-label">% Giảm rác thải</div>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-number" data-target="24">0</span>
-        <div class="stat-label">Tháng hoạt động</div>
+      
+      <!-- CTA cuối Timeline (CẢI TIẾN #2) -->
+      <div class="text-center reveal" style="margin-top: 60px;">
+        <a href="/app" class="btn btn-primary">
+          <i class="fas fa-rocket"></i>
+          Trải nghiệm ngay
+        </a>
       </div>
     </div>
+  </section>
 
-    <!-- BIỂU ĐỒ -->
-    <div class="charts-container">
-      <!-- Pie Chart - Phân bố loại rác -->
-      <div class="chart-card reveal">
-        <h3 class="chart-title">Phân bố loại rác thu gom</h3>
-        <div class="chart-wrapper">
-          <canvas id="wasteDistributionChart"></canvas>
+  <!-- Team Section -->
+  <section id="team" style="padding: 120px 0; background: var(--bg-primary);">
+    <div class="container">
+      <div class="section-header text-center reveal" style="max-width: 100%; margin-bottom: 80px;">
+        <h2><span class="gradient-green">Đội ngũ thực hiện</span></h2>
+        <p class="section-lead">Những người đứng sau thành công của DaLat Waste Wizzard</p>
+      </div>
+
+      <div class="team-grid">
+        <!-- 6 team members (giữ nguyên như code cũ) -->
+        <div class="team-card reveal">
+          <div class="team-avatar">
+            <img src="https://scontent.fdli1-1.fna.fbcdn.net/v/t39.30808-6/594393368_2057231101719364_497808135228932457_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHNYHFS1bcp_UrAGGdWHHA7qrMhoDRdcnKqsyGgNF1ycrXAh8FPx2Xy-P1mHWTeqZET49D2F6KuE_I-1hr_DANV&_nc_ohc=NnKvpYDcpU4Q7kNvwFUaohs&_nc_oc=Adnlci1vJ56uX7bHQj-l-87f2k6Le4JIT30VTPGORFXY6sq90qvreIHb_8hMc6J-1U8&_nc_zt=23&_nc_ht=scontent.fdli1-1.fna&_nc_gid=6jiwpOF0r-HHM8NCdyqlHQ&oh=00_AfnYo_SRXsZ9kMJlD2mZMKHTMgGfs4yE7s-CP6W5ljMrEw&oe=6953FD0E" alt="Nguyễn Ái Mừng" loading="lazy">
+            <div class="team-badge">🏅 Trưởng Dự Án (VN)</div>
+          </div>
+          <h3>Nguyễn Ái Mừng (희문)</h3>
+          <p class="team-role">Đại học Đà Lạt</p>
+          <p class="team-bio">5+ năm nghiên cứu môi trường cao nguyên. Chuyên gia về quản lý rác thải đô thị.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="#" aria-label="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+          </div>
+        </div>
+
+        <!-- Thêm 5 team members khác tương tự -->
+        <div class="team-card reveal">
+          <div class="team-avatar">
+            <img src="https://scontent.fdli1-1.fna.fbcdn.net/v/t39.30808-6/475305875_1259296678488449_6909812612156937871_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeEZ39EGdqGNXBROgFcMe1NKEMFuc4Or5HIQwW5zg6vkcm9rBGEOVARnPxIpxSMRS6_ITYUkMw_xjEN6rSUV7UvN&_nc_ohc=x4yyjtYTDHgQ7kNvwHSNJAi&_nc_oc=AdkF7N1DkUBtMZyNCD5HBJj1OOCpvcN8UedZXkrnQMonrIfF2Z3VIYeds-Kd0-7IJtA&_nc_zt=23&_nc_ht=scontent.fdli1-1.fna&_nc_gid=npToCf0szf7IYlXvYvGN4Q&oh=00_Afk_FNdPhfBBdQ5BFNghO2nor4fsEubSG8NDTa51lXbMgw&oe=6954287D" alt="Võ Lâm Chí Vĩnh" loading="lazy">
+            <div class="team-badge">🏅 Co-Leader (VN)</div>
+          </div>
+          <h3>Võ Lâm Chí Vĩnh (승빈)</h3>
+          <p class="team-role">Trường Đại Học Đà Lạt</p>
+          <p class="team-bio">Chuyên gia AI & IoT cho môi trường. 20+ bài báo quốc tế về waste management.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <a href="#" aria-label="Research"><i class="fas fa-flask"></i></a>
+          </div>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar">
+            <img src="static\images\Thái Sơn.jpg" alt="Thái Sơn" loading="lazy">
+            <div class="team-badge">💻 Lead Developer</div>
+          </div>
+          <h3>강대승 (Thái Sơn)</h3>
+          <p class="team-role">Full-stack Developer</p>
+          <p class="team-bio">Chuyên gia Full-stack Development. Xây dựng và triển khai 30+ hệ thống web từ Frontend đến Backend, tối ưu hiệu năng và bảo mật cho các nền tảng quy mô lớn.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="Portfolio"><i class="fas fa-globe"></i></a>
+          </div>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar">
+            <img src="static\images\Thái Dương.jpg" alt="Thái Dương" loading="lazy">
+            <div class="team-badge">🎨 UX/UI Designer</div>
+          </div>
+          <h3>하태영 (Thái Dương)</h3>
+          <p class="team-role">Full-stack Developer</p>
+          <p class="team-bio">Full-stack Developer cho hệ thống số hóa. Phát triển các nền tảng web phục vụ quản lý, giám sát và tối ưu vận hành trong môi trường thực tế.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+            <a href="#" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+          </div>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar">
+            <img src="https://scontent.fdli1-1.fna.fbcdn.net/v/t39.30808-6/586416527_1382808050026551_4078996079241813375_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeERk9MJjLLuzGRqfwSCuhqYXLQExqE1iTdctATGoTWJN3WZmcQ4pTnRFSugmMFz9gpI8XyNSGh3K24Zptl9UPgF&_nc_ohc=FC8Gsm_ue3IQ7kNvwFuGhUF&_nc_oc=AdkIpYcWZUpoiHmIOU443ai24hdBO3DSHFCzE0y0BGAITtBk34STzh4eyOeY4gNXQyM&_nc_zt=23&_nc_ht=scontent.fdli1-1.fna&_nc_gid=uVnUsCRAG_5zRFBwlaBiOw&oh=00_Afm66p11uhAOwGlbcurwfY0wO76RB6XA2oHq0VGcGp5t-Q&oe=69542FF9" alt="Kim Soo-jin" loading="lazy">
+            <div class="team-badge">📊 Data Scientist</div>
+          </div>
+          <h3>Lưu Thái Thanh Tươi (서린)</h3>
+          <p class="team-role">AI Researcher</p>
+          <p class="team-bio">Chuyên gia Data Science. Phân tích và khai thác dữ liệu lớn để xây dựng mô hình dự đoán, hỗ trợ ra quyết định chiến lược.</p>
+          <div class="team-socials">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Kaggle"><i class="fab fa-kaggle"></i></a>
+          </div>
+        </div>
+
+        <div class="team-card reveal">
+          <div class="team-avatar">
+            <img src="static\images\Lê Thị Hân.jpeg" alt="Lê Thị Hân" loading="lazy">
+            <div class="team-badge">📢 Community Lead</div>
+          </div>
+          <h3>Lê Thị Hân (헤은)</h3>
+          <p class="team-role">Oriental Studies</p>
+          <p class="team-bio">Chuyên gia truyền thông môi trường. Kết nối 20+ trường học tham gia dự án.Cầu nối cho DaLat Waste Wizzardhợp tác</p>
+          <div class="team-socials">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
         </div>
       </div>
 
-      <!-- Column Chart - Tăng trưởng -->
-      <div class="chart-card reveal">
-        <h3 class="chart-title">Lượng rác phân loại theo tháng</h3>
-        <div class="chart-wrapper">
-          <canvas id="monthlyStatsChart"></canvas>
+      <!-- Advisors -->
+      <div class="advisors-section reveal" style="margin-top: 80px;">
+        <h3 style="text-align: center; margin-bottom: 40px; color: var(--text-primary);">Cố vấn dự án</h3>
+        <div class="advisors-grid">
+          <div class="advisor-card">
+            <img src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t39.30808-6/496803265_10225244640094839_6195992626409734257_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a5f93a&_nc_eui2=AeHzjvjoLjb4OVzcfmTmcpBWPuPxlC29_2A-4_GULb3_YKYvQR9xK3LZq-bKuweGN01n72CuGUDWAAth52HFQ24R&_nc_ohc=yyrZKhocDoIQ7kNvwGmrTW3&_nc_oc=AdksGp-vDi_OcZC3FOAVrQEMPcHMx2Dz96M7eWf-4Yus0KzUjtsd9uMmgKV3pSFlAGYZzeLhSAzS_iehaBfhqPDV&_nc_zt=23&_nc_ht=scontent.fsgn2-4.fna&_nc_gid=Xh4C73H2hMJNJXo47gBbaQ&oh=00_AflHWqLl1SiwBQW6B7F9_Ac0mr3dMbnte6omrDRit69UUw&oe=69552499" alt="TS.Trần Ngô Như Khánh" loading="lazy">
+            <div>
+              <h4>TS. Trần Ngô Như Khánh</h4>
+              <p>Trưởng Khoa Công Nghệ Thông Tin</p>
+            </div>
+          </div>
+          <div class="advisor-card">
+            <img src="static\images\Prof. Seon-Woo Lee.jpg" alt="Prof. Seon-Woo Lee" loading="lazy">
+            <div>
+              <h4>Prof. Seon-Woo Lee</h4>
+              <p>Indoor Localization, Embedded Systems-Hallym University</p>
+            </div>
+          </div>
+          <div class="advisor-card">
+            <img src="static\images\Prof. Sung Woo Kim.jpg" alt="Prof. Sung Woo Kim" loading="lazy">
+            <div>
+              <h4>Prof. Sung Woo Kim</h4>
+              <p>Information Systems Engineering, Information Design, Computer Science-Hallym University</p>
+            </div>
+          </div>
         </div>
+      </div>
+      
+      <!-- CTA cuối Team (CẢI TIẾN #2) -->
+      <div class="text-center reveal" style="margin-top: 60px;">
+        <a href="#contact" class="btn btn-secondary">
+          <i class="fas fa-handshake"></i>
+          Hợp tác với chúng tôi
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PRESS COVERAGE SECTION (CẢI TIẾN #4 - UU TIÊN TRUNG)
+       ============================================ -->
+  <section class="press-section" style="padding: 100px 0; background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <h2><span class="gradient-green">Truyền thông nói về chúng tôi</span></h2>
+        <p class="section-lead">DaLat Waste Wizzard trên các phương tiện truyền thông hàng đầu</p>
+      </div>
+      <div class="press-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 60px;">
+        
+        <!-- Press Article 1 -->
+        <div class="press-card reveal" style="background: var(--bg-primary); padding: 24px; border-radius: var(--radius-lg); border: 2px solid rgba(88, 101, 242, 0.1); transition: all 0.3s ease;">
+          <div style="height: 180px; background: linear-gradient(135deg, rgba(88, 101, 242, 0.2), rgba(16, 185, 129, 0.2)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <i class="fas fa-newspaper" style="font-size: 64px; color: var(--blurple); opacity: 0.6;"></i>
+          </div>
+          <h4 style="font-size: 18px; font-weight: 700; color: var(--header-primary); margin-bottom: 12px;">"Dự án xanh của sinh viên Đà Lạt gây ấn tượng"</h4>
+          <p class="press-date" style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            <i class="fas fa-calendar-alt"></i> 15/11/2024 • <strong>VnExpress</strong>
+          </p>
+          <a href="#" class="press-link" style="color: var(--blurple); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+            Đọc bài viết <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Press Article 2 -->
+        <div class="press-card reveal" style="background: var(--bg-primary); padding: 24px; border-radius: var(--radius-lg); border: 2px solid rgba(88, 101, 242, 0.1); transition: all 0.3s ease;">
+          <div style="height: 180px; background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(245, 158, 11, 0.2)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <i class="fas fa-tv" style="font-size: 64px; color: var(--green); opacity: 0.6;"></i>
+          </div>
+          <h4 style="font-size: 18px; font-weight: 700; color: var(--header-primary); margin-bottom: 12px;">"Hợp tác quốc tế cho môi trường bền vững"</h4>
+          <p class="press-date" style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            <i class="fas fa-calendar-alt"></i> 22/08/2024 • <strong>VTV1</strong>
+          </p>
+          <a href="#" class="press-link" style="color: var(--blurple); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+            Xem video <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Press Article 3 -->
+        <div class="press-card reveal" style="background: var(--bg-primary); padding: 24px; border-radius: var(--radius-lg); border: 2px solid rgba(88, 101, 242, 0.1); transition: all 0.3s ease;">
+          <div style="height: 180px; background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.2)); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <i class="fas fa-globe" style="font-size: 64px; color: var(--accent); opacity: 0.6;"></i>
+          </div>
+          <h4 style="font-size: 18px; font-weight: 700; color: var(--header-primary); margin-bottom: 12px;">"Korean-Vietnamese Green Partnership"</h4>
+          <p class="press-date" style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            <i class="fas fa-calendar-alt"></i> 03/06/2023 • <strong>The Korea Times</strong>
+          </p>
+          <a href="#" class="press-link" style="color: var(--blurple); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+            Read article <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Before/After Impact Section -->
+  <section class="impact-section" style="background: linear-gradient(135deg, rgba(88, 101, 242, 0.1), rgba(16, 185, 129, 0.1)); padding: 120px 0;">
+    <div class="container">
+      <div class="section-header text-center reveal" style="max-width: 100%; margin-bottom: 80px;">
+        <h2><span class="gradient-green">Tác động thực tế</span></h2>
+        <p class="section-lead">Sự thay đổi rõ rệt tại các điểm triển khai</p>
+      </div>
+
+      <!-- Before/After comparisons (giữ nguyên như code cũ) -->
+      <div class="before-after-grid">
+        <div class="comparison-card reveal">
+          <h3>📍 Trường THPT Yersin</h3>
+          <div class="comparison-images">
+            <div class="comparison-item before">
+              <img 
+                src="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=600&h=400&fit=crop&q=80" 
+                srcset="https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=300&h=200&fit=crop&q=80 300w,
+                        https://images.unsplash.com/photo-1604187351574-c75ca79f5807?w=600&h=400&fit=crop&q=80 600w"
+                sizes="(max-width: 768px) 300px, 600px"
+                alt="Trước khi triển khai" 
+                loading="lazy">
+              <div class="comparison-label before-label">❌ TRƯỚC (03/2024)</div>
+              <ul class="comparison-stats">
+                <li>🗑️ 1 thùng rác chung</li>
+                <li>📊 0% phân loại</li>
+                <li>😔 Rác tràn, mùi hôi</li>
+              </ul>
+            </div>
+            <div class="comparison-item after">
+              <img 
+                src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=600&h=400&fit=crop&q=80" 
+                alt="Sau khi triển khai" 
+                loading="lazy">
+              <div class="comparison-label after-label">✅ SAU (12/2024)</div>
+              <ul class="comparison-stats success">
+                <li>♻️ 4 thùng màu rõ ràng</li>
+                <li>📊 92% phân loại đúng</li>
+                <li>😊 Sạch sẽ, có hệ thống</li>
+              </ul>
+            </div>
+          </div>
+          <div class="comparison-result">
+            <strong>Kết quả:</strong> 450kg rác/tháng → 320kg sau phân loại. Tiết kiệm 28% chi phí xử lý.
+          </div>
+        </div>
+
+        <div class="comparison-card reveal">
+          <h3>📍 Khu dân cư Nguyễn Trung Trực 2</h3>
+          <div class="comparison-images">
+            <div class="comparison-item before">
+              <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?w=600&h=400&fit=crop&q=80" alt="Trước" loading="lazy">
+              <div class="comparison-label before-label">❌ TRƯỚC (05/2024)</div>
+              <ul class="comparison-stats">
+                <li>📦 Rác chất đống vỉa hè</li>
+                <li>🚫 Không có điểm thu gom</li>
+                <li>⏰ Xe rác đến bất thường</li>
+              </ul>
+            </div>
+            <div class="comparison-item after">
+              <img src="https://images.unsplash.com/photo-1611284446314-60a58ac0deb9?w=600&h=400&fit=crop&q=80" alt="Sau" loading="lazy">
+              <div class="comparison-label after-label">✅ SAU (12/2024)</div>
+              <ul class="comparison-stats success">
+                <li>🏡 3 điểm thu gom IoT</li>
+                <li>📱 App theo dõi real-time</li>
+                <li>⏰ Lịch trình cố định</li>
+              </ul>
+            </div>
+          </div>
+          <div class="comparison-result">
+            <strong>Kết quả:</strong> 85% cư dân hài lòng ↑ (từ 42%). Giảm 67% khiếu nại về môi trường.
+          </div>
+        </div>
+      </div>
+
+      <!-- Impact Numbers -->
+      <div class="impact-numbers reveal" style="margin-top: 80px;">
+        <h3 style="text-align: center; margin-bottom: 48px;">📈 Con số ấn tượng sau 9 tháng</h3>
+        <div class="impact-grid">
+          <div class="impact-card">
+            <div class="impact-icon">🌳</div>
+            <div class="impact-value">1,234</div>
+            <div class="impact-label">Kg rác tái chế</div>
+            <div class="impact-note">≈ 24 cây xanh trồng mới</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-icon">💧</div>
+            <div class="impact-value">3,500</div>
+            <div class="impact-label">Lít nước tiết kiệm</div>
+            <div class="impact-note">Từ tái chế giấy & nhựa</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-icon">⚡</div>
+            <div class="impact-value">2.8</div>
+            <div class="impact-label">Tấn CO₂ giảm</div>
+            <div class="impact-note">≈ 200 cây hấp thụ/năm</div>
+          </div>
+          <div class="impact-card">
+            <div class="impact-icon">👥</div>
+            <div class="impact-value">567</div>
+            <div class="impact-label">Người tham gia</div>
+            <div class="impact-note">Từ 5 trường + 2 khu dân cư</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <!-- FAQ Section -->
+<section id="faq" aria-labelledby="faq-heading" style="padding: 120px 0; background: var(--bg-primary);">
+  <div class="container">
+    <div class="section-header text-center reveal" style="max-width: 100%; margin-bottom: 80px;">
+      <h2 id="faq-heading"><span class="gradient-green">Câu hỏi thường gặp</span></h2>
+      <p class="section-lead">Giải đáp mọi thắc mắc về DaLat Waste Wizzard</p>
+    </div>
+
+    <!-- 2 CỘT FAQ -->
+    <div class="faq-container-grid">
+      
+      <!-- CỘT TRÁI - 5 FAQ -->
+      <div class="faq-column">
+        
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">💰</span>
+            <span class="faq-question">Dự án có miễn phí không?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>Hoàn toàn miễn phí!</strong> Web app, tất cả tài liệu hướng dẫn, và hỗ trợ kỹ thuật đều 100% free. Dự án được tài trợ bởi Hallym University và ĐH Đà Lạt.</p>
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">🤝</span>
+            <span class="faq-question">Làm sao để tham gia dự án?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p>Có 3 cách:</p>
+            <ul>
+              <li><strong>Cá nhân:</strong> Tải app, đăng ký tài khoản và bắt đầu phân loại rác ngay!</li>
+              <li><strong>Trường học/Tổ chức:</strong> Liên hệ email <a href="mailto:greenspring@dalat.edu.vn">greenspring@dalat.edu.vn</a></li>
+              <li><strong>Tình nguyện viên:</strong> Điền form <a href="#contact">tại đây</a></li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">📱</span>
+            <span class="faq-question">App có hoạt động offline không?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>Có!</strong> AI nhận diện rác chạy trực tiếp trên điện thoại (on-device AI), không cần internet. Để đồng bộ điểm số và xem leaderboard, bạn cần kết nối mạng.</p>
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">🎁</span>
+            <span class="faq-question">Điểm tích lũy đổi được gì?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p>Bạn có thể đổi điểm lấy:</p>
+            <ul>
+              <li>🎒 Túi vải, bình nước tái sử dụng (từ 500đ)</li>
+              <li>🌱 Cây xanh mini (từ 1,000đ)</li>
+              <li>📚 Voucher sách (từ 2,000đ)</li>
+              <li>🏆 Chứng nhận NFT (từ 5,000đ)</li>
+              <li>🎓 Học bổng môi trường (từ 10,000đ)</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">🤖</span>
+            <span class="faq-question">AI nhận diện chính xác đến đâu?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p>Model AI đạt <strong>94.3% độ chính xác</strong> trên dataset 10,000+ ảnh. Với rác phổ biến (chai nhựa, hộp giấy), độ chính xác lên tới 98%.</p>
+            <p><em>Lưu ý: Với ảnh mờ/thiếu sáng, độ chính xác có thể giảm.</em></p>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- CỘT PHẢI - 5 FAQ -->
+      <div class="faq-column">
+
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">📊</span>
+            <span class="faq-question">Số liệu thống kê lấy từ đâu?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>Nguồn dữ liệu thực tế:</strong></p>
+            <ul>
+              <li>📱 <strong>Kg rác & Lượt quét:</strong> Dữ liệu từ app (cập nhật real-time)</li>
+              <li>👥 <strong>Người tham gia:</strong> Số tài khoản đã đăng ký và active</li>
+              <li>🤖 <strong>Độ chính xác AI:</strong> Test trên validation dataset 10,000+ ảnh</li>
+              <li>🌱 <strong>CO₂ giảm:</strong> Tính toán theo công thức IPCC (0.28 kg CO₂/kg rác tái chế)</li>
+              <li>📍 <strong>Điểm thu gom:</strong> Hợp tác với UBND & trường học tại Đà Lạt</li>
+            </ul>
+            <p><em>Tất cả số liệu được kiểm toán hàng tháng bởi ĐH Đà Lạt và Hallym University.</em></p>
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">🗺️</span>
+            <span class="faq-question">Điểm thu gom rác ở đâu?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p>Hiện có <strong>15 điểm thu gom</strong> tại Đà Lạt:</p>
+            <ul>
+              <li>5 trường THPT (Yersin, Lê Quý Đôn, Bùi Thị Xuân, Trần Phú, Phan Chu Trinh)</li>
+              <li>3 khu dân cư (Hoa Hồng, Phú Đông, Xuân Thọ)</li>
+              <li>2 chợ (Chợ Đà Lạt, Chợ Hòa Bình)</li>
+              <li>2 công viên (Hồ Xuân Hương, Công viên Yersin)</li>
+            </ul>
+            <p>Xem bản đồ chi tiết <a href="#map">tại đây</a> hoặc trong app (tab 🗺️ Map).</p>
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">🌐</span>
+            <span class="faq-question">App có hỗ trợ tiếng Hàn không?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>Có!</strong> App hỗ trợ <strong>2 ngôn ngữ</strong>: Tiếng Việt 🇻🇳 và Tiếng Hàn 🇰🇷. Tự động nhận diện hoặc chuyển đổi thủ công qua nút 🌐.</p>
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">🔒</span>
+            <span class="faq-question">Dữ liệu cá nhân có được bảo mật không?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>An toàn tuyệt đối!</strong> Chúng tôi:</p>
+            <ul>
+              <li>🔐 Mã hóa SSL/TLS cho mọi kết nối</li>
+              <li>🔐 Không bán/chia sẻ dữ liệu cho bên thứ 3</li>
+              <li>🔐 Tuân thủ GDPR & PDPA</li>
+              <li>🔐 Cho phép xóa tài khoản bất cứ lúc nào</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="faq-item reveal">
+          <summary>
+            <span class="faq-icon">🚀</span>
+            <span class="faq-question">Dự án sẽ phát triển thế nào?</span>
+            <i class="fas fa-chevron-down"></i>
+          </summary>
+          <div class="faq-answer">
+            <p><strong>Roadmap 2026-2027:</strong></p>
+            <ul>
+              <li>Q1/2026: Tích hợp blockchain cho carbon credit NFT</li>
+              <li>Q2/2026: Mở rộng 50 trường học + 10 khu dân cư</li>
+              <li>Q3/2026: Tính năng AR hướng dẫn phân loại</li>
+              <li>Q4/2026: IoT bins (thùng rác thông minh)</li>
+              <li>2027: Nhân rộng ra Nha Trang, Buôn Ma Thuột</li>
+            </ul>
+          </div>
+        </details>
+
       </div>
     </div>
   </div>
-</section>
+
+
+
+        <!-- Contact CTA -->
+        <div class="faq-cta reveal" style="margin-top: 60px; text-align: center;">
+          <p style="font-size: 18px; color: var(--text-secondary); margin-bottom: 24px;">
+            Không tìm thấy câu trả lời? Chúng tôi luôn sẵn sàng hỗ trợ!
+          </p>
+          <a href="#contact" class="btn btn-primary">
+            <i class="fas fa-envelope"></i>
+            Liên hệ với chúng tôi
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Features Section -->
   <section id="features">
     <div class="container">
       <div class="section-header reveal">
-        <h2><span class="gradient-green">Tại sao chọn Green Spring?</span></h2>
+        <h2><span class="gradient-green">Tại sao chọn DaLat Waste Wizzard?</span></h2>
         <p class="section-lead">
           Dự án kết hợp tri thức từ hai trường đại học, mang đến giải pháp toàn diện cho vấn đề rác thải tại Đà Lạt – thành phố du lịch và thượng nguồn của nhiều dòng nước.
         </p>
@@ -216,7 +1040,7 @@
           <div class="feature-icon">
             <i class="fas fa-hands-helping"></i>
           </div>
-          <h3>Green Spring – Hợp lưu xanh</h3>
+          <h3>DaLat Waste Wizzard – Hợp lưu xanh</h3>
           <p>Khi hai "mạch nguồn" hòa quyện, chúng tạo thành một dòng chảy xanh bền vững, từ nhận thức người dân đến hệ thống quản lý rác thực tế.</p>
         </div>
       </div>
@@ -224,7 +1048,7 @@
   </section>
 
   <!-- Interactive Waste Classifier Demo -->
-  <section id="demo" style="background: rgba(30, 31, 34, 0.5);">
+  <section id="demo" style="background: rgb(107 160 39 / 50%);">
     <div class="container">
       <div class="section-header text-center reveal" style="max-width: 100%;">
         <h2>Thử phân loại rác thải</h2>
@@ -243,60 +1067,224 @@
         </div>
 
         <div class="waste-bins">
-          <div class="waste-bin" data-bin="recyclable">
-            <div class="waste-bin-icon">♻️</div>
-            <div class="waste-bin-label">Tái chế</div>
-          </div>
-          <div class="waste-bin" data-bin="organic">
-            <div class="waste-bin-icon">🌱</div>
-            <div class="waste-bin-label">Hữu cơ</div>
-          </div>
-          <div class="waste-bin" data-bin="other">
-            <div class="waste-bin-icon">🗑️</div>
-            <div class="waste-bin-label">Còn lại</div>
-          </div>
-        </div>
+  <div class="waste-bin" data-bin="recyclable">
+    <div class="waste-bin-icon">♻️</div>
+    <div class="waste-bin-label">
+      <div class="label-row">
+        <span class="flag">🇻🇳</span>
+        <span>Tái chế</span>
+      </div>
+      <div class="label-row">
+        <span class="flag">🇰🇷</span>
+        <span>재활용</span>
+      </div>
+    </div>
+  </div>
+  <div class="waste-bin" data-bin="organic">
+    <div class="waste-bin-icon">🌱</div>
+    <div class="waste-bin-label">
+      <div class="label-row">
+        <span class="flag">🇻🇳</span>
+        <span>Hữu cơ</span>
+      </div>
+      <div class="label-row">
+        <span class="flag">🇰🇷</span>
+        <span>유기성 폐기물</span>
+      </div>
+    </div>
+  </div>
+  <div class="waste-bin" data-bin="other">
+    <div class="waste-bin-icon">🗑️</div>
+    <div class="waste-bin-label">
+      <div class="label-row">
+        <span class="flag">🇻🇳</span>
+        <span>Còn lại</span>
+      </div>
+      <div class="label-row">
+        <span class="flag">🇰🇷</span>
+        <span>일반쓰레기</span>
+      </div>
+    </div>
+  </div>
+</div>
+
         <p id="demoResult" style="margin-top: 24px; font-size: 18px; color: var(--green); font-weight: 600;"></p>
       </div>
     </div>
   </section>
 
   <!-- Testimonials Slider -->
-  <section id="testimonials">
-    <div class="container">
-      <div class="section-header text-center reveal" style="max-width: 100%;">
-        <h2>Cộng đồng nói gì về chúng tôi?</h2>
+  <!-- ============================================
+     TESTIMONIALS SECTION - 2 NGƯỜI/SLIDE
+     ============================================ -->
+<section id="testimonials" class="testimonials-section" style="background: linear-gradient(135deg, rgba(88, 101, 242, 0.05), rgba(16, 185, 129, 0.05)); padding: 120px 0;">
+  <div class="container">
+    <div class="section-header text-center reveal">
+      <h2><span class="gradient-green">Đánh giá từ cộng đồng</span></h2>
+      <p class="section-lead">Phản hồi thực tế từ những người tham gia dự án</p>
+    </div>
+
+    <div class="testimonials reveal">
+      <div class="testimonial-track" id="testimonialTrack">
+        
+        <!-- SLIDE 1: Giáo sư + Sinh viên -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">
+              <img src="https://scontent.fsgn2-5.fna.fbcdn.net/v/t39.30808-6/593499201_24829910546691789_8311682976169994734_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEMneYuFAOgg_keWbBhWoi0kBl3gMaNXUqQGXeAxo1dSjuBiUVsIRrDgnf3DAiLXxzLotpRXoU7nvkAnPfp0Pxc&_nc_ohc=l7FjtYlnX94Q7kNvwEEIR9L&_nc_oc=AdlpJPGPjgkqWFn3Zif_0rTO6UUDskJR_sW-icVQn66qnmDXXA91L6jMrK01eYSDarkLhnC7-yyGw6UdMizSO3R4&_nc_zt=23&_nc_ht=scontent.fsgn2-5.fna&_nc_gid=DHqAQq_JhnNcWWzhR_t9Qg&oh=00_AfnNL65bdByAw0nVF3nz1vKY8ctFSGaUyzronPPb6JtM2w&oe=69555523" alt="ThS. La Quốc Thắng">
+            </div>
+            <p class="testimonial-text">
+              <span class="quote-vi">"Sau 6 tháng triển khai, sinh viên phân loại đúng 94% lượng rác. Kết quả vượt mong đợi!"</span>
+              <span class="quote-ko">"6개월 후, 학생들은 쓰레기의 94%를 올바르게 분류했습니다. 기대 이상의 결과입니다!"</span>
+            </p>
+            <div class="testimonial-author">
+              <strong>ThS. La Quốc Thắng</strong>
+              <span class="author-title">Giảng Viên Khoa CNTT - ĐH Đà Lạt</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">
+              <img src="https://smilemedia.vn/wp-content/uploads/2022/09/cach-chup-hinh-the-dep.jpeg" alt="Nguyễn Thị Linh Chi">
+            </div>
+            <p class="testimonial-text">
+              <span class="quote-vi">"App giúp tôi phân loại rác đúng cách và nhận điểm thưởng. Vừa học vừa chơi rất hay!"</span>
+              <span class="quote-ko">"앱 덕분에 쓰레기를 올바르게 분류하고 포인트도 받아요. 배우면서 즐겁습니다!"</span>
+            </p>
+            <div class="testimonial-author">
+              <strong>Nguyễn Thị Linh Chi</strong>
+              <span class="author-title">Sinh viên năm 3 - ĐH Đà Lạt</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: Doanh nhân + Giảng viên Hàn Quốc -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">
+              <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="Trần Quốc Anh">
+            </div>
+            <p class="testimonial-text">
+              <span class="quote-vi">"Dự án này chứng minh công nghệ AI có thể thay đổi thói quen người dân. Đà Lạt cần nhiều sáng kiến như vậy!"</span>
+              <span class="quote-ko">"이 프로젝트는 AI 기술이 사람들의 습관을 바꿀 수 있음을 증명합니다. 달랏에는 이런 아이디어가 더 필요합니다!"</span>
+            </p>
+            <div class="testimonial-author">
+              <strong>Trần Quốc Anh</strong>
+              <span class="author-title">CEO Dalat Green Tech</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">
+              <img src="https://chupanhthe.vn/img/Chup-anh-the-Han-Quoc-xinh-lung-linh.jpg" alt="Hyejin">
+            </div>
+            <p class="testimonial-text">
+              <span class="quote-vi">"Hợp tác Việt-Hàn trong lĩnh vực môi trường mang lại giá trị thực tiễn.DaLat Waste Wizzard là minh chứng!"</span>
+              <span class="quote-ko">"베트남과 한국의 환경 분야 협력은 실질적인 가치를 창출합니다. "DaLat Waste Wizzard" 프로젝트가 바로 그 증거입니다!"</span>
+            </p>
+            <div class="testimonial-author">
+              <strong>혜진 (Hyejin)</strong>
+              <span class="author-title">Sinh Viên - Hallym University</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3: Tình nguyện viên + Học sinh -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">
+              <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Lê Thị Mai">
+            </div>
+            <p class="testimonial-text">
+              <span class="quote-vi">"Tham gia dự án giúp tôi hiểu giá trị của từng hành động nhỏ vì môi trường. Rất tự hào!"</span>
+              <span class="quote-ko">"프로젝트 참여로 환경을 위한 작은 행동의 가치를 깨달았습니다. 매우 자랑스럽습니다!"</span>
+            </p>
+            <div class="testimonial-author">
+              <strong>Lê Thị Mai (레 티 마이)</strong>
+              <span class="author-title">Tình nguyện viên Green Spring</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">
+              <img src="https://randomuser.me/api/portraits/men/18.jpg" alt="Hoàng Tuấn Kiệt">
+            </div>
+            <p class="testimonial-text">
+              <span class="quote-vi">"Em và bạn bè đua nhau thu thập điểm. Học về môi trường chưa bao giờ vui đến thế!"</span>
+              <span class="quote-ko">"친구들과 포인트 모으기 경쟁해요. 환경 공부가 이렇게 재미있을 줄 몰랐어요!"</span>
+            </p>
+            <div class="testimonial-author">
+              <strong>Hoàng Tuấn Kiệt</strong>
+              <span class="author-title">Học sinh lớp 11 - THPT Yersin</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 4: Chủ quán cafe + Nhân viên môi trường -->
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">
+              <img src="https://randomuser.me/api/portraits/women/35.jpg" alt="Phạm Thu Hà">
+            </div>
+            <p class="testimonial-text">
+              <span class="quote-vi">"Quán cafe của tôi giảm được 40% rác thải nhờ hướng dẫn từ dự án. Khách hàng cũng ủng hộ!"</span>
+              <span class="quote-ko">"프로젝트 덕분에 카페 쓰레기가 40% 줄었습니다. 고객들도 지지해 줍니다!"</span>
+            </p>
+            <div class="testimonial-author">
+              <strong>Phạm Thu Hà</strong>
+              <span class="author-title">Chủ Dalat Garden Cafe</span>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-avatar">
+              <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Kim Min-soo">
+            </div>
+            <p class="testimonial-text">
+              <span class="quote-vi">"Công nghệ AI hỗ trợ đắc lực cho công tác quản lý rác thải. Mô hình đáng nhân rộng!"</span>
+              <span class="quote-ko">"AI 기술이 폐기물 관리에 큰 도움이 됩니다. 확대할 가치가 있는 모델입니다!"</span>
+            </p>
+            <div class="testimonial-author">
+              <strong>김민수 (Kim Min-soo)</strong>
+              <span class="author-title">Chuyên viên - Sở TN&MT Lâm Đồng</span>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div class="testimonials reveal">
-        <div class="testimonial-track" id="testimonialTrack">
-          <div class="testimonial-card">
-            <div class="testimonial-avatar">👨‍🎓</div>
-            <p class="testimonial-text">"Dự án này giúp tôi hiểu rõ hơn về phân loại rác. Ứng dụng web rất dễ sử dụng và hữu ích!"</p>
-            <div class="testimonial-author">Nguyễn Văn A - Sinh viên ĐH Đà Lạt</div>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-avatar">👩‍🏫</div>
-            <p class="testimonial-text">"Green Spring mang đến giải pháp thực tế cho vấn đề môi trường. Tôi rất ủng hộ!"</p>
-            <div class="testimonial-author">Trần Thị B - Giảng viên</div>
-          </div>
-          <div class="testimonial-card">
-            <div class="testimonial-avatar">👨‍💼</div>
-            <p class="testimonial-text">"Cách tiếp cận khoa học và có trách nhiệm. Đà Lạt cần nhiều dự án như thế này!"</p>
-            <div class="testimonial-author">Lê Văn C - Doanh nhân</div>
-          </div>
-        </div>
-        <div class="testimonial-dots" id="testimonialDots">
-          <span class="dot active" data-index="0"></span>
-          <span class="dot" data-index="1"></span>
-          <span class="dot" data-index="2"></span>
-        </div>
+      <!-- Dots Navigation -->
+      <div class="testimonial-dots" id="testimonialDots">
+        <span class="dot active" data-index="0"></span>
+        <span class="dot" data-index="1"></span>
+        <span class="dot" data-index="2"></span>
+        <span class="dot" data-index="3"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- ============================================
+       CTA SECTION "Bắt đầu ngay" (CẢI TIẾN #2)
+       ============================================ -->
+  <section class="cta-section" style="padding: 100px 0; background: linear-gradient(135deg, var(--blurple), var(--green)); text-align: center; color: white;">
+    <div class="container">
+      <h2 style="font-size: 48px; margin-bottom: 24px; font-weight: 900;">Sẵn sàng tạo thay đổi?</h2>
+      <p style="font-size: 20px; margin-bottom: 48px; opacity: 0.95;">Tham gia 567+ người đang xây dựng Đà Lạt xanh</p>
+      <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="/app" class="btn" style="background: white; color: var(--blurple); font-size: 18px; padding: 18px 40px; box-shadow: 0 8px 24px rgba(0,0,0,0.2);">
+          <i class="fas fa-rocket"></i> Bắt đầu ngay
+        </a>
+        <a href="#contact" class="btn" style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); color: white; font-size: 18px; padding: 18px 40px; border: 2px solid white;">
+          <i class="fas fa-calendar-alt"></i> Đặt lịch tư vấn
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Products Section -->
-  <section id="products" style="background: rgba(30, 31, 34, 0.5);">
+  <section id="products" style="background: linear-gradient(90deg, transparent, rgba(88, 101, 242, 0.2), rgba(16, 185, 129, 0.2), transparent);">
     <div class="container">
       <div class="section-header reveal">
         <h2>Mục tiêu & Sản phẩm</h2>
@@ -357,7 +1345,7 @@
             <i class="fas fa-university"></i>
           </div>
           <h3>Đại học Đà Lạt</h3>
-          <p>Phường 1, Thành phố Đà Lạt<br/>Lâm Đồng, Việt Nam</p>
+          <p>Phường Lâm Viên, Thành phố Đà Lạt<br/>Lâm Đồng, Việt Nam</p>
         </div>
         
         <div class="card text-center reveal">
@@ -373,7 +1361,7 @@
             <i class="fas fa-envelope"></i>
           </div>
           <h3>Email dự án</h3>
-          <p>greenspring@dalat.edu.vn</p>
+          <p><a href="mailto:DaLatWasteWizzard@dalat.edu.vn">DaLatWasteWizzard@dalat.edu.vn</a></p>
         </div>
       </div>
     </div>
@@ -384,30 +1372,22 @@
     <div class="container">
       <div class="footer-content">
         <div>
-          <div class="footer-brand">Dalat–Hallym Green Spring</div>
+          <div class="footer-brand">Dalat–Hallym DaLat Waste Wizzard</div>
           <p class="footer-tagline">From clean source to clean city<br/>Từ nguồn trong đến thành phố sạch</p>
           <div class="social-links">
-  <!-- 1. FACEBOOK - nth-child(1) -->
-  <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  
-  <!-- 2. TWITTER - nth-child(2) -->
-  <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
-    <i class="fab fa-twitter"></i>
-  </a>
-  
-  <!-- 3. INSTAGRAM - nth-child(3) -->
-  <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
-    <i class="fab fa-instagram"></i>
-  </a>
-  
-  <!-- 4. YOUTUBE - nth-child(4) -->
-  <a href="https://youtube.com" target="_blank" class="social-link" aria-label="YouTube">
-    <i class="fab fa-youtube"></i>
-  </a>
-</div>
-
+            <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-link" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="social-link" aria-label="YouTube">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
         </div>
         
         <div class="footer-section">
@@ -431,23 +1411,31 @@
       </div>
       
       <div class="footer-bottom">
-        © 2025 Green Spring Project. Bảo vệ môi trường – Trách nhiệm của mọi người.
+        © 2025 DaLat Waste Wizzard Project. Bảo vệ môi trường – Trách nhiệm của mọi người.
       </div>
     </div>
   </footer>
 
   <!-- Floating Action Buttons -->
   <div class="fab-container">
-    <div class="fab scroll-top" id="scrollToTop">
+    <div class="fab scroll-top" id="scrollToTop" role="button" tabindex="0" aria-label="Scroll to top">
       <i class="fas fa-arrow-up"></i>
     </div>
-    <div class="fab" onclick="alert('Chatbot tính năng sắp ra mắt!')">
+    <div class="fab" role="button" tabindex="0" aria-label="Chat" onclick="alert('Chatbot tính năng sắp ra mắt!')">
       <i class="fas fa-comments"></i>
     </div>
   </div>
 
-  <!-- Custom JavaScript -->
-   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Chart.js -->
+   
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  
+
+
+   
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

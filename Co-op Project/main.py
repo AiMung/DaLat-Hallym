@@ -6,21 +6,6 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-@app.route("/guide")
-def guide():
-    return render_template("guide.html")
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
 
-@app.route("/collection")
-def collection():
-    return render_template("collection.html")
-
-@app.route("/news")
-def news():
-    return render_template("news.html")
-
-@app.route("/dashboard")
-def dashboard():
-    return render_template("user/dashboard.html")
-
-if __name__ == "__main__":
-    app.run(debug=True)

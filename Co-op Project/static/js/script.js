@@ -1,5 +1,29 @@
 // ============================================
-// Theme Switcher (Tính năng MỚI)
+// Sound System - SIMPLIFIED (Không có toggle button)
+// ============================================
+const sounds = {
+  success: new Audio('https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3'),
+  error: new Audio('https://assets.mixkit.co/active_storage/sfx/2955/2955-preview.mp3')
+};
+
+// Set volume
+sounds.success.volume = 0.5;
+sounds.error.volume = 0.4;
+
+// Preload
+sounds.success.preload = 'auto';
+sounds.error.preload = 'auto';
+
+// Helper function
+function playSound(type) {
+  if (sounds[type]) {
+    sounds[type].currentTime = 0;
+    sounds[type].play().catch(e => console.log('Audio playback failed:', e));
+  }
+}
+
+// ============================================
+// Theme Switcher
 // ============================================
 const themeToggle = document.createElement('div');
 themeToggle.className = 'theme-toggle';
@@ -9,11 +33,9 @@ themeToggle.innerHTML = `
 `;
 document.body.appendChild(themeToggle);
 
-// Load saved theme from localStorage
 const savedTheme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 
-// Toggle theme with animation
 themeToggle.addEventListener('click', () => {
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const newTheme = currentTheme === 'light' ? 'dark' : 'light';
@@ -21,7 +43,6 @@ themeToggle.addEventListener('click', () => {
   document.documentElement.setAttribute('data-theme', newTheme);
   localStorage.setItem('theme', newTheme);
   
-  // Smooth rotation animation
   themeToggle.style.transition = 'transform 0.3s ease';
   themeToggle.style.transform = 'scale(0.8) rotate(180deg)';
   setTimeout(() => {
@@ -30,7 +51,7 @@ themeToggle.addEventListener('click', () => {
 });
 
 // ============================================
-// Performance: Debounce Function (Tối ưu hiệu suất)
+// Performance Functions
 // ============================================
 function debounce(func, wait = 15) {
   let timeout;
@@ -44,9 +65,6 @@ function debounce(func, wait = 15) {
   };
 }
 
-// ============================================
-// Performance: Throttle Function (Giới hạn số lần gọi)
-// ============================================
 function throttle(func, limit = 100) {
   let inThrottle;
   return function(...args) {
@@ -59,13 +77,11 @@ function throttle(func, limit = 100) {
 }
 
 // ============================================
-// Loading Screen - Cải tiến
+// Loading Screen
 // ============================================
 window.addEventListener('load', () => {
   const loadingScreen = document.getElementById('loadingScreen');
-  
-  // Minimum loading time 1.5s để tránh flash
-  const minLoadTime = 1500;
+  const minLoadTime = 800;
   const startTime = performance.now();
   
   function hideLoader() {
@@ -74,18 +90,17 @@ window.addEventListener('load', () => {
     
     setTimeout(() => {
       loadingScreen.classList.add('hidden');
-      // Enable interactions after loading
       document.body.style.pointerEvents = 'auto';
+      document.body.classList.add('loaded');
     }, remaining);
   }
   
-  // Disable interactions during loading
   document.body.style.pointerEvents = 'none';
   hideLoader();
 });
 
 // ============================================
-// Scroll Progress Bar - Optimized với Throttle
+// Scroll Progress Bar
 // ============================================
 const updateScrollProgress = throttle(() => {
   const scrollProgress = document.getElementById('scrollProgress');
@@ -100,7 +115,7 @@ const updateScrollProgress = throttle(() => {
 window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
 // ============================================
-// Header Scroll Effect - Optimized với Throttle
+// Header Scroll Effect
 // ============================================
 let lastScrollY = 0;
 let ticking = false;
@@ -115,13 +130,6 @@ const updateHeader = () => {
     header.classList.remove('scrolled');
   }
   
-  // Auto-hide header khi scroll xuống (Optional)
-  // if (scrollY > lastScrollY && scrollY > 200) {
-  //   header.style.transform = 'translateY(-100%)';
-  // } else {
-  //   header.style.transform = 'translateY(0)';
-  // }
-  
   lastScrollY = scrollY;
   ticking = false;
 };
@@ -134,12 +142,11 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ============================================
-// Mobile Hamburger Menu - Accessibility Improved
+// Mobile Menu
 // ============================================
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
-// Thêm ARIA attributes cho accessibility
 hamburger.setAttribute('aria-label', 'Toggle navigation menu');
 hamburger.setAttribute('aria-expanded', 'false');
 hamburger.setAttribute('role', 'button');
@@ -147,20 +154,14 @@ hamburger.setAttribute('role', 'button');
 hamburger.addEventListener('click', () => {
   const isActive = hamburger.classList.toggle('active');
   mobileMenu.classList.toggle('active');
-  
-  // Update ARIA attributes
   hamburger.setAttribute('aria-expanded', isActive);
-  
-  // Prevent body scroll khi menu mở
   document.body.style.overflow = isActive ? 'hidden' : '';
   
-  // Focus management
   if (isActive) {
     mobileMenu.querySelector('a')?.focus();
   }
 });
 
-// Close mobile menu when clicking links
 mobileMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('active');
@@ -170,14 +171,12 @@ mobileMenu.querySelectorAll('a').forEach(link => {
   });
 });
 
-// Close menu on ESC key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
     hamburger.click();
   }
 });
 
-// Close menu when clicking outside
 document.addEventListener('click', (e) => {
   if (mobileMenu.classList.contains('active') && 
       !mobileMenu.contains(e.target) && 
@@ -187,20 +186,17 @@ document.addEventListener('click', (e) => {
 });
 
 // ============================================
-// Smooth Scroll - Improved
+// Smooth Scroll
 // ============================================
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     const href = this.getAttribute('href');
-    
-    // Ignore empty anchors
     if (href === '#' || href === '#!') return;
     
     e.preventDefault();
     const target = document.querySelector(href);
     
     if (target) {
-      // Tính toán offset cho fixed header
       const headerHeight = document.getElementById('header')?.offsetHeight || 80;
       const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
       
@@ -209,10 +205,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         behavior: 'smooth'
       });
       
-      // Update URL hash
       history.pushState(null, '', href);
-      
-      // Focus management cho accessibility
       target.setAttribute('tabindex', '-1');
       target.focus({ preventScroll: true });
     }
@@ -220,7 +213,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ============================================
-// Scroll to Top FAB - Improved
+// Scroll to Top Button
 // ============================================
 const scrollToTopBtn = document.getElementById('scrollToTop');
 
@@ -242,23 +235,21 @@ if (scrollToTopBtn) {
       top: 0,
       behavior: 'smooth'
     });
-    
-    // Focus vào top của page
     document.querySelector('h1')?.focus({ preventScroll: true });
   });
 }
 
 // ============================================
-// Stats Counter Animation - Improved
+// Stats Counter Animation
 // ============================================
 function animateCounter(element) {
   const target = parseInt(element.getAttribute('data-target'));
   const duration = 2500;
-  const frameDuration = 1000 / 60; // 60fps
+  const frameDuration = 1000 / 60;
   const totalFrames = Math.round(duration / frameDuration);
   let frame = 0;
   
-  const easeOutQuad = t => t * (2 - t); // Easing function
+  const easeOutQuad = t => t * (2 - t);
   
   const updateCounter = () => {
     frame++;
@@ -270,7 +261,7 @@ function animateCounter(element) {
     if (frame < totalFrames) {
       requestAnimationFrame(updateCounter);
     } else {
-      element.textContent = target; // Ensure exact value
+      element.textContent = target;
     }
   };
   
@@ -278,11 +269,11 @@ function animateCounter(element) {
 }
 
 // ============================================
-// Intersection Observer - Scroll Reveal (Performance Better)
+// Intersection Observer
 // ============================================
 const observerOptions = {
   root: null,
-  rootMargin: '0px 0px -100px 0px', // Trigger 100px trước khi vào viewport
+  rootMargin: '0px 0px -100px 0px',
   threshold: 0.1
 };
 
@@ -291,35 +282,30 @@ const revealObserver = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       entry.target.classList.add('active');
       
-      // Animate counters
       if (entry.target.querySelector('.stat-number') && 
           !entry.target.classList.contains('counted')) {
         entry.target.classList.add('counted');
         entry.target.querySelectorAll('.stat-number').forEach(animateCounter);
       }
       
-      // Unobserve sau khi animate để tăng performance
       revealObserver.unobserve(entry.target);
     }
   });
 }, observerOptions);
 
-// Observe all reveal elements
 document.querySelectorAll('.reveal').forEach(element => {
   revealObserver.observe(element);
 });
 
 // ============================================
-// Drag & Drop Waste Classifier Demo - Improved
+// Drag & Drop Waste Classifier - VỚI ÂM THANH LỖI
 // ============================================
 const wasteItems = document.querySelectorAll('.waste-item');
 const wasteBins = document.querySelectorAll('.waste-bin');
 const demoResult = document.getElementById('demoResult');
 let draggedItem = null;
 
-// Add keyboard support for drag & drop
 wasteItems.forEach(item => {
-  // Mouse drag
   item.addEventListener('dragstart', (e) => {
     draggedItem = e.target;
     e.target.style.opacity = '0.5';
@@ -330,7 +316,6 @@ wasteItems.forEach(item => {
     e.target.style.opacity = '1';
   });
   
-  // Touch support
   item.addEventListener('touchstart', (e) => {
     draggedItem = e.target;
     e.target.style.opacity = '0.5';
@@ -340,7 +325,6 @@ wasteItems.forEach(item => {
     e.target.style.opacity = '1';
   });
   
-  // Keyboard support (ACCESSIBILITY)
   item.setAttribute('tabindex', '0');
   item.setAttribute('role', 'button');
   item.setAttribute('aria-label', `Drag ${item.textContent} to correct bin`);
@@ -366,7 +350,7 @@ wasteBins.forEach(bin => {
     const binType = bin.getAttribute('data-bin');
     
     if (itemType === binType) {
-      // Correct answer
+      // ✅ ĐÚNG - Phát âm thanh thành công
       const icon = draggedItem.textContent;
       draggedItem.remove();
       
@@ -375,25 +359,25 @@ wasteBins.forEach(bin => {
       demoResult.setAttribute('role', 'status');
       demoResult.setAttribute('aria-live', 'polite');
       
-      // Add icon to bin
       bin.querySelector('.waste-bin-icon').textContent += icon;
-      
-      // Particle effect
       createParticles(bin);
       
-      // Sound effect (optional)
-      playSuccessSound();
+      // 🔊 PHÁT ÂM THANH THÀNH CÔNG
+      playSound('success');
+      
     } else {
-      // Wrong answer
+      // ❌ SAI - Phát âm thanh lỗi
       demoResult.textContent = '❌ Chưa đúng, hãy thử lại!';
       demoResult.style.color = '#EF4444';
       demoResult.setAttribute('role', 'alert');
       
-      // Shake animation
       draggedItem.style.animation = 'shake 0.5s';
       setTimeout(() => {
         draggedItem.style.animation = '';
       }, 500);
+      
+      // 🔊 PHÁT ÂM THANH LỖI
+      playSound('error');
     }
     
     setTimeout(() => {
@@ -405,7 +389,7 @@ wasteBins.forEach(bin => {
 });
 
 // ============================================
-// Particle Effect - Enhanced
+// Particle Effect
 // ============================================
 function createParticles(element) {
   const rect = element.getBoundingClientRect();
@@ -446,7 +430,7 @@ function createParticles(element) {
     const animate = () => {
       x += vx;
       y += vy;
-      vy += gravity; // Apply gravity
+      vy += gravity;
       opacity -= 0.015;
       
       particle.style.left = x + 'px';
@@ -466,33 +450,7 @@ function createParticles(element) {
 }
 
 // ============================================
-// Success Sound (Optional - Web Audio API)
-// ============================================
-function playSuccessSound() {
-  try {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
-    oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
-    oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
-    
-    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.3);
-  } catch (e) {
-    console.log('Web Audio API not supported');
-  }
-}
-
-// ============================================
-// Testimonials Slider - Improved với Touch Support
+// Testimonials Slider
 // ============================================
 const testimonialTrack = document.getElementById('testimonialTrack');
 const dots = document.querySelectorAll('.dot');
@@ -514,7 +472,6 @@ function updateSlider(index, smooth = true) {
   });
 }
 
-// Dot navigation
 dots.forEach((dot, index) => {
   dot.setAttribute('role', 'button');
   dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
@@ -526,7 +483,6 @@ dots.forEach((dot, index) => {
     resetAutoSlide();
   });
   
-  // Keyboard support
   dot.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -535,7 +491,6 @@ dots.forEach((dot, index) => {
   });
 });
 
-// Auto-advance với pause on hover
 function startAutoSlide() {
   autoSlideInterval = setInterval(() => {
     currentSlide = (currentSlide + 1) % dots.length;
@@ -548,7 +503,6 @@ function resetAutoSlide() {
   startAutoSlide();
 }
 
-// Pause on hover
 testimonialTrack.addEventListener('mouseenter', () => {
   clearInterval(autoSlideInterval);
 });
@@ -557,7 +511,6 @@ testimonialTrack.addEventListener('mouseleave', () => {
   startAutoSlide();
 });
 
-// Touch/Swipe support
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -574,10 +527,8 @@ function handleSwipe() {
   const swipeThreshold = 50;
   
   if (touchEndX < touchStartX - swipeThreshold) {
-    // Swipe left
     currentSlide = (currentSlide + 1) % dots.length;
   } else if (touchEndX > touchStartX + swipeThreshold) {
-    // Swipe right
     currentSlide = (currentSlide - 1 + dots.length) % dots.length;
   } else {
     return;
@@ -587,16 +538,14 @@ function handleSwipe() {
   resetAutoSlide();
 }
 
-// Start auto-slide
 startAutoSlide();
 
-// Update slider on window resize
 window.addEventListener('resize', debounce(() => {
   updateSlider(currentSlide, false);
 }, 300));
 
 // ============================================
-// Prefers Reduced Motion (ACCESSIBILITY)
+// Accessibility - Prefers Reduced Motion
 // ============================================
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -604,13 +553,11 @@ if (prefersReducedMotion) {
   document.documentElement.style.setProperty('--transition-fast', '0.01ms');
   document.documentElement.style.setProperty('--transition-base', '0.01ms');
   document.documentElement.style.setProperty('--transition-smooth', '0.01ms');
-  
-  // Disable auto-slide
   clearInterval(autoSlideInterval);
 }
 
 // ============================================
-// Console Easter Egg - Enhanced
+// Console Easter Egg
 // ============================================
 const consoleStyles = {
   title: 'color: #10B981; font-size: 32px; font-weight: 900; text-shadow: 2px 2px 4px rgba(16, 185, 129, 0.3);',
@@ -643,37 +590,23 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
 }
 
 // ============================================
-// Error Handling - Global
+// Error Handling
 // ============================================
 window.addEventListener('error', (e) => {
   console.error('Global error caught:', e.error);
-  // Optional: Send to error tracking service (Sentry, LogRocket, etc.)
 });
 
 // ============================================
-// Cleanup on Page Unload
+// Charts với Chart.js
 // ============================================
-window.addEventListener('beforeunload', () => {
-  clearInterval(autoSlideInterval);
-  revealObserver.disconnect();
-});
-// ============================================
-// Charts - Biểu đồ với Chart.js
-// ============================================
-
-// Kiểm tra Chart.js đã load chưa
 if (typeof Chart !== 'undefined') {
-  
-  // Cấu hình chung cho charts
   Chart.defaults.font.family = "'Poppins', sans-serif";
   Chart.defaults.font.size = 13;
   Chart.defaults.color = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim();
   
-  // Lấy theme hiện tại
   const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
   const isDark = currentTheme === 'dark';
   
-  // Màu sắc theo theme
   const chartColors = {
     blurple: '#5865F2',
     green: '#10B981',
@@ -684,19 +617,16 @@ if (typeof Chart !== 'undefined') {
     textColor: isDark ? '#D1D5DB' : '#4B5563'
   };
   
-  // ============================================
-  // 1. PIE CHART - Phân bố loại rác
-  // ============================================
+  // Pie Chart
   const pieCtx = document.getElementById('wasteDistributionChart');
-  
   if (pieCtx) {
     new Chart(pieCtx, {
-      type: 'doughnut', // hoặc 'pie'
+      type: 'doughnut',
       data: {
         labels: ['Tái chế', 'Hữu cơ', 'Còn lại', 'Nguy hại'],
         datasets: [{
           label: 'Kg',
-          data: [450, 380, 320, 84], // Tổng = 1234kg
+          data: [450, 380, 320, 84],
           backgroundColor: [
             chartColors.blurple,
             chartColors.green,
@@ -716,10 +646,7 @@ if (typeof Chart !== 'undefined') {
             position: 'bottom',
             labels: {
               padding: 20,
-              font: {
-                size: 14,
-                weight: '600'
-              },
+              font: { size: 14, weight: '600' },
               color: chartColors.textColor,
               usePointStyle: true,
               pointStyle: 'circle'
@@ -754,11 +681,8 @@ if (typeof Chart !== 'undefined') {
     });
   }
   
-  // ============================================
-  // 2. COLUMN CHART - Thống kê theo tháng
-  // ============================================
+  // Column Chart
   const columnCtx = document.getElementById('monthlyStatsChart');
-  
   if (columnCtx) {
     new Chart(columnCtx, {
       type: 'bar',
@@ -797,15 +721,10 @@ if (typeof Chart !== 'undefined') {
         },
         scales: {
           x: {
-            grid: {
-              display: false
-            },
+            grid: { display: false },
             ticks: {
               color: chartColors.textColor,
-              font: {
-                size: 13,
-                weight: '600'
-              }
+              font: { size: 13, weight: '600' }
             }
           },
           y: {
@@ -827,10 +746,7 @@ if (typeof Chart !== 'undefined') {
             position: 'bottom',
             labels: {
               padding: 20,
-              font: {
-                size: 14,
-                weight: '600'
-              },
+              font: { size: 14, weight: '600' },
               color: chartColors.textColor,
               usePointStyle: true,
               pointStyle: 'circle'
@@ -859,75 +775,35 @@ if (typeof Chart !== 'undefined') {
     });
   }
   
-  // ============================================
   // Update charts khi đổi theme
-  // ============================================
-  const themeToggle = document.querySelector('.theme-toggle');
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      // Reload charts sau 350ms (đợi animation theme)
+  const themeToggleBtn = document.querySelector('.theme-toggle');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
       setTimeout(() => {
-        location.reload(); // Hoặc dùng Chart.update() cho mượt hơn
+        location.reload();
       }, 350);
     });
   }
   
 } else {
-  console.warn('Chart.js chưa được load. Kiểm tra CDN!');
+  console.warn('Chart.js chưa được load!');
 }
+
 // ============================================
-// Language Switcher - Đổi ngôn ngữ Việt ⇄ Hàn
+// Cleanup on Page Unload
 // ============================================
-const languageToggle = document.getElementById('languageToggle');
-
-// Load saved language from localStorage
-let currentLang = localStorage.getItem('language') || 'vi';
-
-// Function to translate page
-function translatePage(lang) {
-  currentLang = lang;
+window.addEventListener('beforeunload', () => {
+  clearInterval(autoSlideInterval);
+  revealObserver.disconnect();
   
-  // Update language toggle text
-  const langText = languageToggle.querySelector('.lang-text');
-  langText.textContent = lang === 'vi' ? 'KR' : 'VI';
+  if (typeof Chart !== 'undefined') {
+    Chart.helpers.each(Chart.instances, function(instance) {
+      instance.destroy();
+    });
+  }
   
-  // Update HTML lang attribute
-  document.documentElement.setAttribute('lang', lang === 'vi' ? 'vi' : 'ko');
-  
-  // Translate all elements with data-translate attribute
-  document.querySelectorAll('[data-translate]').forEach(element => {
-    const key = element.getAttribute('data-translate');
-    if (translations[lang][key]) {
-      element.innerHTML = translations[lang][key];
-    }
+  Object.values(sounds).forEach(sound => {
+    sound.pause();
+    sound.src = '';
   });
-  
-  // Save to localStorage
-  localStorage.setItem('language', lang);
-  
-  // Smooth animation
-  document.body.style.transition = 'opacity 0.3s ease';
-  document.body.style.opacity = '0.95';
-  setTimeout(() => {
-    document.body.style.opacity = '1';
-  }, 150);
-}
-
-// Toggle language on click
-if (languageToggle) {
-  languageToggle.addEventListener('click', () => {
-    const newLang = currentLang === 'vi' ? 'ko' : 'vi';
-    translatePage(newLang);
-    
-    // Rotation animation
-    languageToggle.style.transition = 'transform 0.4s ease';
-    languageToggle.style.transform = 'scale(0.85) rotate(360deg)';
-    setTimeout(() => {
-      languageToggle.style.transform = 'scale(1) rotate(0deg)';
-    }, 400);
-  });
-}
-
-// Initialize with saved language
-translatePage(currentLang);
-
+});
