@@ -1,0 +1,816 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Điểm thu gom{% endblock %}
+{% block page_name %}Quản lý điểm thu gom{% endblock %}
+
+{% block content %}
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <div class="search-box">
+    <i class="fas fa-search"></i>
+    <input type="text" placeholder="Tìm kiếm theo địa chỉ, tên..." id="searchPoints">
+  </div>
+  
+  <div class="toolbar-actions">
+    <select class="filter-select">
+      <option>Tất cả loại</option>
+      <option>Tái chế chung</option>
+      <option>Rác hữu cơ</option>
+      <option>Rác nguy hại</option>
+      <option>Trung tâm thu gom</option>
+    </select>
+    
+    <select class="filter-select">
+      <option>Tất cả khu vực</option>
+      <option>Đà Lạt</option>
+      <option>Hà Nội</option>
+      <option>TP.HCM</option>
+    </select>
+    
+    <button class="btn btn-primary" data-modal="addPointModal">
+      <i class="fas fa-plus"></i> Thêm điểm thu gom
+    </button>
+  </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="stats-grid-small">
+  <div class="stat-card-sm">
+    <div class="stat-icon-sm" style="background: #5865F2;">
+      <i class="fas fa-map-marker-alt"></i>
+    </div>
+    <div class="stat-info-sm">
+      <h4>{{ points_stats.total }}</h4>
+      <p>Tổng điểm</p>
+    </div>
+  </div>
+  
+  <div class="stat-card-sm">
+    <div class="stat-icon-sm" style="background: #10B981;">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="stat-info-sm">
+      <h4>{{ points_stats.active }}</h4>
+      <p>Đang hoạt động</p>
+    </div>
+  </div>
+  
+  <div class="stat-card-sm">
+    <div class="stat-icon-sm" style="background: #F59E0B;">
+      <i class="fas fa-clock"></i>
+    </div>
+    <div class="stat-info-sm">
+      <h4>{{ points_stats.pending }}</h4>
+      <p>Chờ duyệt</p>
+    </div>
+  </div>
+  
+  <div class="stat-card-sm">
+    <div class="stat-icon-sm" style="background: #EF4444;">
+      <i class="fas fa-exclamation-triangle"></i>
+    </div>
+    <div class="stat-info-sm">
+      <h4>{{ points_stats.full }}</h4>
+      <p>Đầy/bảo trì</p>
+    </div>
+  </div>
+</div>
+
+<!-- Map View with Stats -->
+<div class="map-section-enhanced">
+  <div class="map-card-modern">
+    <div class="card-header" style="padding: 24px; background: linear-gradient(135deg, #F9FAFB, #F3F4F6); border-bottom: 2px solid #E5E7EB;">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="margin: 0; font-size: 18px; font-weight: 800; color: #1F2937;">
+          <i class="fas fa-map-marked-alt" style="color: #5865F2; margin-right: 10px;"></i>
+          Bản đồ điểm thu gom
+        </h3>
+        <div class="map-view-buttons">
+          <button class="map-view-btn active" data-view="2d">
+            <i class="fas fa-map"></i> 2D
+          </button>
+          <button class="map-view-btn" data-view="3d">
+            <i class="fas fa-cube"></i> 3D
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Stats Bar -->
+    <div class="map-stats-bar">
+      <div class="map-stat-item">
+        <i class="fas fa-location-dot" style="color: #10B981;"></i>
+        <div>
+          <strong id="statsActive">{{ points_stats.active }}</strong>
+          <span>Hoạt động</span>
+        </div>
+      </div>
+      <div class="map-stat-item">
+        <i class="fas fa-exclamation-triangle" style="color: #F59E0B;"></i>
+        <div>
+          <strong id="statsWarning">{{ collection_points|selectattr('capacity_percent', 'ge', 70)|list|length }}</strong>
+          <span>Gần đầy</span>
+        </div>
+      </div>
+      <div class="map-stat-item">
+        <i class="fas fa-pause-circle" style="color: #9CA3AF;"></i>
+        <div>
+          <strong id="statsInactive">{{ collection_points|selectattr('status', 'equalto', 'maintenance')|list|length }}</strong>
+          <span>Tạm ngừng</span>
+        </div>
+      </div>
+      <div class="map-stat-item">
+        <i class="fas fa-weight-hanging" style="color: #3B82F6;"></i>
+        <div>
+          <strong id="statsTotal">{{ (collection_points|sum(attribute='usage_count')/10)|round|int }} kg</strong>
+          <span>Tổng thu gom</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body" style="padding: 0; position: relative;">
+      <!-- Leaflet Map Container -->
+      <div id="leafletMap" class="map-container-3d"></div>
+      
+      <!-- Map Filter Controls -->
+      <div class="map-filter-controls">
+        <div class="filter-group">
+          <label class="filter-checkbox">
+            <input type="checkbox" checked data-status="active">
+            <span class="filter-label">
+              <span class="filter-dot active"></span> Hoạt động
+            </span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" checked data-status="warning">
+            <span class="filter-label">
+              <span class="filter-dot warning"></span> Gần đầy
+            </span>
+          </label>
+          <label class="filter-checkbox">
+            <input type="checkbox" checked data-status="inactive">
+            <span class="filter-label">
+              <span class="filter-dot inactive"></span> Tạm ngừng
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card-footer">
+      <div class="map-legend-enhanced">
+        <div class="legend-item">
+          <span class="legend-marker active"></span>
+          <span>Hoạt động tốt (<span id="legendActive">{{ points_stats.active }}</span>)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-marker warning"></span>
+          <span>Gần đầy (<span id="legendWarning">{{ collection_points|selectattr('capacity_percent', 'ge', 70)|list|length }}</span>)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-marker inactive"></span>
+          <span>Tạm ngừng (<span id="legendInactive">{{ collection_points|selectattr('status', 'equalto', 'maintenance')|list|length }}</span>)</span>
+        </div>
+        <div class="legend-item">
+          <i class="fas fa-info-circle" style="color: #6B7280; margin-right: 6px;"></i>
+          <span>Click vào marker để xem chi tiết</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Points List -->
+<div class="data-table-card">
+  <div class="card-header">
+    <h3><i class="fas fa-list"></i> Danh sách điểm thu gom</h3>
+    <div class="view-switcher">
+      <button class="view-btn active" data-view="list">
+        <i class="fas fa-list"></i>
+      </button>
+      <button class="view-btn" data-view="grid">
+        <i class="fas fa-th"></i>
+      </button>
+    </div>
+  </div>
+  
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tên điểm</th>
+        <th>Loại</th>
+        <th>Địa chỉ</th>
+        <th>Khu vực</th>
+        <th>Trạng thái</th>
+        <th>Dung tích</th>
+        <th>Lượt sử dụng</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for point in collection_points %}
+      <tr>
+        <td><strong>#{{ point.id }}</strong></td>
+        <td>
+          <div class="point-name">
+            <i class="fas {{ point.icon }}"></i>
+            <strong>{{ point.name }}</strong>
+          </div>
+        </td>
+        <td>
+          <span class="type-badge {{ point.type }}">
+            {{ point.type_name }}
+          </span>
+        </td>
+        <td>
+          <div class="address-cell">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>{{ point.address }}</span>
+          </div>
+        </td>
+        <td>{{ point.area }}</td>
+        <td>
+          <span class="status-badge {{ point.status }}">
+            {% if point.status == 'active' %}
+              <i class="fas fa-check-circle"></i> Hoạt động
+            {% elif point.status == 'full' %}
+              <i class="fas fa-exclamation-circle"></i> Đầy
+            {% elif point.status == 'maintenance' %}
+              <i class="fas fa-tools"></i> Bảo trì
+            {% else %}
+              <i class="fas fa-times-circle"></i> Ngưng
+            {% endif %}
+          </span>
+        </td>
+        <td>
+          <div class="capacity-indicator">
+            <div class="capacity-bar">
+              <div class="capacity-fill {{ 'full' if point.capacity_percent >= 90 else 'warning' if point.capacity_percent >= 70 else 'normal' }}" 
+                   style="width: {{ point.capacity_percent }}%;"></div>
+            </div>
+            <span>{{ point.capacity_percent }}%</span>
+          </div>
+        </td>
+        <td><strong>{{ point.usage_count }}</strong></td>
+        <td>
+          <div class="action-buttons">
+            <button class="btn-icon" title="Xem trên bản đồ" onclick="showOnMap({{ point.lat }}, {{ point.lng }})">
+              <i class="fas fa-map"></i>
+            </button>
+            <button class="btn-icon" title="Chỉnh sửa">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn-icon text-danger" title="Xóa">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <!-- Pagination -->
+  <div class="pagination">
+    <button class="btn-pagination">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <span>Trang 1 / {{ (collection_points|length / 10)|round(0, 'ceil')|int }}</span>
+    <button class="btn-pagination">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Usage Statistics - INLINE 2 CHARTS -->
+<div class="charts-row-inline">
+  <!-- Chart 1: Advanced Line Chart with Multiple Lines -->
+  <div class="chart-card">
+    <div class="card-header">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3><i class="fas fa-chart-line"></i> Xu hướng sử dụng điểm thu gom</h3>
+        <div class="chart-controls">
+          <select class="chart-period-select">
+            <option value="7">7 ngày</option>
+            <option value="30" selected>30 ngày</option>
+            <option value="90">90 ngày</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" style="padding: 24px;">
+      <canvas id="usageChart" height="350"></canvas>
+    </div>
+    <div class="chart-footer">
+      <div class="chart-metric">
+        <span class="metric-label">Trung bình/ngày</span>
+        <strong class="metric-value">342 lượt</strong>
+      </div>
+      <div class="chart-metric">
+        <span class="metric-label">Tăng trưởng</span>
+        <strong class="metric-value success">+18.5%</strong>
+      </div>
+      <div class="chart-metric">
+        <span class="metric-label">Cao nhất</span>
+        <strong class="metric-value">523 lượt</strong>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Chart 2: Advanced Doughnut Chart -->
+  <div class="chart-card">
+    <div class="card-header">
+      <h3><i class="fas fa-chart-pie"></i> Phân bố theo loại rác</h3>
+    </div>
+    <div class="card-body" style="padding: 24px;">
+      <canvas id="typeDistChart" height="350"></canvas>
+    </div>
+    <div class="chart-footer">
+      <div class="chart-legend-grid">
+        <div class="legend-stat">
+          <div class="legend-color" style="background: #3B82F6;"></div>
+          <span>Tái chế chung: <strong>14 điểm</strong></span>
+        </div>
+        <div class="legend-stat">
+          <div class="legend-color" style="background: #10B981;"></div>
+          <span>Rác hữu cơ: <strong>5 điểm</strong></span>
+        </div>
+        <div class="legend-stat">
+          <div class="legend-color" style="background: #EF4444;"></div>
+          <span>Rác nguy hại: <strong>4 điểm</strong></span>
+        </div>
+        <div class="legend-stat">
+          <div class="legend-color" style="background: #F59E0B;"></div>
+          <span>Hỗn hợp: <strong>2 điểm</strong></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Additional Charts Row -->
+<div class="charts-row" style="margin-top: 24px;">
+  <!-- Chart 3: Bar Chart - Top Locations -->
+  <div class="chart-card">
+    <div class="card-header">
+      <h3><i class="fas fa-chart-bar"></i> Top 10 điểm thu gom tích cực</h3>
+    </div>
+    <div class="card-body" style="padding: 24px;">
+      <canvas id="topLocationsChart" height="350"></canvas>
+    </div>
+  </div>
+  
+  <!-- Chart 4: Polar Chart - Capacity Status -->
+  <div class="chart-card">
+    <div class="card-header">
+      <h3><i class="fas fa-tachometer-alt"></i> Trạng thái dung tích</h3>
+    </div>
+    <div class="card-body" style="padding: 24px;">
+      <canvas id="capacityChart" height="350"></canvas>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+// ⭐ LEAFLET MAP INITIALIZATION
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize map centered on Đà Lạt
+  const map = L.map('leafletMap', {
+    center: [11.9404, 108.4383],
+    zoom: 13,
+    zoomControl: false
+  });
+
+  // Add zoom control to top left
+  L.control.zoom({ position: 'topleft' }).addTo(map);
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Collection points data
+  const collectionPoints = {{ collection_points | tojson }};
+  
+  // Custom icons
+  const iconActive = L.divIcon({
+    className: 'custom-marker',
+    html: '<div style="background: linear-gradient(135deg, #10B981, #34D399); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.5); border: 3px solid white;"><i class="fas fa-recycle"></i></div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16]
+  });
+
+  const iconWarning = L.divIcon({
+    className: 'custom-marker',
+    html: '<div style="background: linear-gradient(135deg, #F59E0B, #FCD34D); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 4px 12px rgba(245, 158, 11, 0.5); border: 3px solid white;"><i class="fas fa-exclamation-triangle"></i></div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16]
+  });
+
+  const iconInactive = L.divIcon({
+    className: 'custom-marker',
+    html: '<div style="background: linear-gradient(135deg, #9CA3AF, #D1D5DB); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; box-shadow: 0 4px 12px rgba(156, 163, 175, 0.5); border: 3px solid white;"><i class="fas fa-pause-circle"></i></div>',
+    iconSize: [32, 32],
+    iconAnchor: [16, 16]
+  });
+
+  // Marker layers
+  const markers = {};
+
+  // Add markers
+  collectionPoints.forEach(point => {
+    let icon = iconActive;
+    let status = 'active';
+    
+    if (point.capacity_percent >= 70) {
+      icon = iconWarning;
+      status = 'warning';
+    } else if (point.status === 'maintenance' || point.status === 'full') {
+      icon = iconInactive;
+      status = 'inactive';
+    }
+
+    const marker = L.marker([point.lat, point.lng], { icon: icon }).addTo(map);
+    
+    // Create custom popup
+    const popupContent = `
+      <div class="custom-popup">
+        <h4><i class="fas ${point.icon}"></i> ${point.name}</h4>
+        <div class="popup-info-row">
+          <strong>Địa chỉ:</strong>
+          <span>${point.address}</span>
+        </div>
+        <div class="popup-info-row">
+          <strong>Loại:</strong>
+          <span>${point.type_name}</span>
+        </div>
+        <div class="popup-info-row">
+          <strong>Lượt sử dụng:</strong>
+          <span>${point.usage_count} lượt</span>
+        </div>
+        <div class="popup-info-row">
+          <strong>Dung tích:</strong>
+          <span>${point.capacity_percent}%</span>
+        </div>
+        <div class="popup-capacity-bar">
+          <div class="popup-capacity-fill" style="width: ${point.capacity_percent}%; background: ${point.capacity_percent >= 90 ? '#EF4444' : point.capacity_percent >= 70 ? '#F59E0B' : '#10B981'};"></div>
+        </div>
+        <div class="popup-actions">
+          <button class="popup-btn primary" onclick="alert('Chỉnh sửa ${point.name}')">
+            <i class="fas fa-edit"></i> Chỉnh sửa
+          </button>
+          <button class="popup-btn secondary" onclick="alert('Xem thống kê ${point.name}')">
+            <i class="fas fa-chart-bar"></i> Thống kê
+          </button>
+        </div>
+      </div>
+    `;
+    
+    marker.bindPopup(popupContent, {
+      maxWidth: 300,
+      className: 'custom-leaflet-popup'
+    });
+
+    // Store marker with status
+    if (!markers[status]) markers[status] = [];
+    markers[status].push(marker);
+  });
+
+  // Filter controls
+  document.querySelectorAll('.filter-checkbox input').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+      const status = this.dataset.status;
+      const checked = this.checked;
+      
+      if (markers[status]) {
+        markers[status].forEach(marker => {
+          if (checked) {
+            marker.addTo(map);
+          } else {
+            map.removeLayer(marker);
+          }
+        });
+      }
+    });
+  });
+
+  console.log('✅ Leaflet map initialized with', collectionPoints.length, 'points');
+});
+
+// Show on map function
+function showOnMap(lat, lng) {
+  document.getElementById('leafletMap').scrollIntoView({ behavior: 'smooth' });
+  // Note: You can add map.setView([lat, lng], 15) if you want to recenter
+}
+
+// Usage Chart
+// ===== CHART 1: ADVANCED LINE CHART =====
+const usageCtx = document.getElementById('usageChart');
+if (usageCtx) {
+  // Create gradient
+  const gradientBg = usageCtx.getContext('2d').createLinearGradient(0, 0, 0, 350);
+  gradientBg.addColorStop(0, 'rgba(88, 101, 242, 0.3)');
+  gradientBg.addColorStop(1, 'rgba(88, 101, 242, 0.0)');
+  
+  const gradientBg2 = usageCtx.getContext('2d').createLinearGradient(0, 0, 0, 350);
+  gradientBg2.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
+  gradientBg2.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+  
+  new Chart(usageCtx, {
+    type: 'line',
+    data: {
+      labels: ['01/12', '03/12', '05/12', '07/12', '09/12', '11/12', '13/12', '15/12', '17/12', '19/12', '21/12', '23/12', '25/12', '27/12'],
+      datasets: [
+        {
+          label: 'Tổng lượt sử dụng',
+          data: [245, 289, 312, 298, 356, 378, 423, 445, 398, 421, 467, 489, 512, 523],
+          borderColor: '#5865F2',
+          backgroundColor: gradientBg,
+          tension: 0.4,
+          borderWidth: 3,
+          pointRadius: 0,
+          pointHoverRadius: 8,
+          pointHoverBackgroundColor: '#5865F2',
+          pointHoverBorderColor: 'white',
+          pointHoverBorderWidth: 3,
+          fill: true
+        },
+        {
+          label: 'Điểm ĐH Đà Lạt',
+          data: [89, 102, 115, 98, 134, 145, 167, 178, 156, 169, 189, 198, 212, 234],
+          borderColor: '#10B981',
+          backgroundColor: gradientBg2,
+          tension: 0.4,
+          borderWidth: 3,
+          pointRadius: 0,
+          pointHoverRadius: 8,
+          pointHoverBackgroundColor: '#10B981',
+          pointHoverBorderColor: 'white',
+          pointHoverBorderWidth: 3,
+          fill: true
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: 'index',
+        intersect: false,
+      },
+      plugins: { 
+        legend: { 
+          display: true,
+          position: 'top',
+          labels: {
+            font: { size: 13, weight: '700' },
+            padding: 20,
+            usePointStyle: true,
+            pointStyle: 'circle'
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          padding: 12,
+          titleFont: { size: 14, weight: 'bold' },
+          bodyFont: { size: 13 },
+          callbacks: {
+            label: function(context) {
+              return context.dataset.label + ': ' + context.parsed.y + ' lượt';
+            }
+          }
+        }
+      },
+      scales: {
+        y: { 
+          beginAtZero: true, 
+          grid: { 
+            color: '#F3F4F6',
+            drawBorder: false
+          },
+          ticks: { 
+            font: { size: 12, weight: '600' },
+            color: '#6B7280',
+            callback: function(value) {
+              return value + ' lượt';
+            }
+          }
+        },
+        x: { 
+          grid: { display: false },
+          ticks: { 
+            font: { size: 12, weight: '600' },
+            color: '#6B7280'
+          }
+        }
+      },
+      animation: {
+        duration: 2000,
+        easing: 'easeInOutQuart'
+      }
+    }
+  });
+}
+
+// ===== CHART 2: ADVANCED DOUGHNUT CHART =====
+const typeCtx = document.getElementById('typeDistChart');
+if (typeCtx) {
+  new Chart(typeCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Tái chế chung', 'Rác hữu cơ', 'Rác nguy hại', 'Hỗn hợp'],
+      datasets: [{
+        data: [14, 5, 4, 2],
+        backgroundColor: [
+          '#3B82F6',
+          '#10B981',
+          '#EF4444',
+          '#F59E0B'
+        ],
+        borderWidth: 4,
+        borderColor: '#fff',
+        hoverOffset: 20,
+        hoverBorderWidth: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { 
+          display: false
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          padding: 12,
+          titleFont: { size: 14, weight: 'bold' },
+          bodyFont: { size: 13 },
+          callbacks: {
+            label: function(context) {
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const percentage = ((context.parsed / total) * 100).toFixed(1);
+              return context.label + ': ' + context.parsed + ' điểm (' + percentage + '%)';
+            }
+          }
+        }
+      },
+      cutout: '65%',
+      animation: {
+        animateRotate: true,
+        animateScale: true,
+        duration: 2000,
+        easing: 'easeInOutQuart'
+      }
+    }
+  });
+}
+
+// ===== CHART 3: TOP LOCATIONS BAR CHART =====
+const topLocationsCtx = document.getElementById('topLocationsChart');
+if (topLocationsCtx) {
+  new Chart(topLocationsCtx, {
+    type: 'bar',
+    data: {
+      labels: ['ĐH ĐL - Căng tin', 'ĐH ĐL - KTX B', 'ĐH ĐL - KTX A', 'ĐH ĐL - Cổng chính', 'Chợ ĐL', 'Giảng đường B', 'Giảng đường A', 'Sân vận động', 'Thư viện', 'KDC Lâm Viên'],
+      datasets: [{
+        label: 'Lượt sử dụng',
+        data: [5234, 4890, 4567, 3421, 2156, 3156, 2987, 2341, 2134, 1532],
+        backgroundColor: [
+          'rgba(88, 101, 242, 0.8)',
+          'rgba(59, 130, 246, 0.8)',
+          'rgba(16, 185, 129, 0.8)',
+          'rgba(34, 197, 94, 0.8)',
+          'rgba(245, 158, 11, 0.8)',
+          'rgba(251, 191, 36, 0.8)',
+          'rgba(239, 68, 68, 0.8)',
+          'rgba(249, 115, 22, 0.8)',
+          'rgba(139, 92, 246, 0.8)',
+          'rgba(168, 85, 247, 0.8)'
+        ],
+        borderRadius: 8,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          padding: 12,
+          callbacks: {
+            label: function(context) {
+              return 'Lượt sử dụng: ' + context.parsed.x.toLocaleString();
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          grid: { color: '#F3F4F6' },
+          ticks: { 
+            font: { size: 11, weight: '600' },
+            color: '#6B7280',
+            callback: function(value) {
+              return value.toLocaleString();
+            }
+          }
+        },
+        y: {
+          grid: { display: false },
+          ticks: { 
+            font: { size: 11, weight: '700' },
+            color: '#374151'
+          }
+        }
+      },
+      animation: {
+        duration: 2000,
+        easing: 'easeInOutQuart'
+      }
+    }
+  });
+}
+
+// ===== CHART 4: CAPACITY POLAR CHART =====
+const capacityCtx = document.getElementById('capacityChart');
+if (capacityCtx) {
+  new Chart(capacityCtx, {
+    type: 'polarArea',
+    data: {
+      labels: ['0-30% (Tốt)', '30-50% (Bình thường)', '50-70% (Khá đầy)', '70-90% (Gần đầy)', '90-100% (Đầy)'],
+      datasets: [{
+        data: [6, 8, 5, 4, 2],
+        backgroundColor: [
+          'rgba(16, 185, 129, 0.7)',
+          'rgba(59, 130, 246, 0.7)',
+          'rgba(245, 158, 11, 0.7)',
+          'rgba(251, 146, 60, 0.7)',
+          'rgba(239, 68, 68, 0.7)'
+        ],
+        borderWidth: 3,
+        borderColor: '#fff'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: { size: 11, weight: '700' },
+            padding: 15,
+            usePointStyle: true
+          }
+        },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          padding: 12,
+          callbacks: {
+            label: function(context) {
+              return context.label + ': ' + context.parsed.r + ' điểm';
+            }
+          }
+        }
+      },
+      scales: {
+        r: {
+          beginAtZero: true,
+          ticks: {
+            font: { size: 11, weight: '600' },
+            color: '#6B7280',
+            backdropColor: 'rgba(255, 255, 255, 0.8)',
+            backdropPadding: 4
+          },
+          grid: {
+            color: '#E5E7EB'
+          }
+        }
+      },
+      animation: {
+        duration: 2000,
+        easing: 'easeInOutQuart'
+      }
+    }
+  });
+}
+
+</script>
+{% endblock %}

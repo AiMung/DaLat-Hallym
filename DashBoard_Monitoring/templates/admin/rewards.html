@@ -1,0 +1,202 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Quản lý phần thưởng{% endblock %}
+{% block page_name %}Phần thưởng{% endblock %}
+
+{% block content %}
+
+<!-- Stats Cards -->
+<div class="rewards-stats-grid">
+  <div class="stat-card-mini">
+    <div class="stat-mini-icon" style="background: linear-gradient(135deg, #F59E0B, #FCD34D);">
+      <i class="fas fa-gift"></i>
+    </div>
+    <div class="stat-mini-content">
+      <h3>{{ rewards_stats.total_rewards }}</h3>
+      <p>Tổng phần thưởng</p>
+      <span class="stat-mini-change positive">
+        <i class="fas fa-arrow-up"></i> +5 mới
+      </span>
+    </div>
+  </div>
+
+  <div class="stat-card-mini">
+    <div class="stat-mini-icon" style="background: linear-gradient(135deg, #10B981, #34D399);">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    <div class="stat-mini-content">
+      <h3>{{ rewards_stats.redeemed }}</h3>
+      <p>Đã đổi</p>
+      <span class="stat-mini-change positive">
+        <i class="fas fa-arrow-up"></i> +15%
+      </span>
+    </div>
+  </div>
+
+  <div class="stat-card-mini">
+    <div class="stat-mini-icon" style="background: linear-gradient(135deg, #5865F2, #7289DA);">
+      <i class="fas fa-coins"></i>
+    </div>
+    <div class="stat-mini-content">
+      <h3>{{ rewards_stats.total_points_used }}</h3>
+      <p>Điểm đã dùng</p>
+      <span class="stat-mini-change positive">
+        <i class="fas fa-arrow-up"></i> +8.2%
+      </span>
+    </div>
+  </div>
+
+  <div class="stat-card-mini">
+    <div class="stat-mini-icon" style="background: linear-gradient(135deg, #EF4444, #F87171);">
+      <i class="fas fa-exclamation-triangle"></i>
+    </div>
+    <div class="stat-mini-content">
+      <h3>{{ rewards_stats.out_of_stock }}</h3>
+      <p>Hết hàng</p>
+      <span class="stat-mini-change negative">
+        <i class="fas fa-arrow-down"></i> Cần nhập
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <div class="filter-tabs">
+    <button class="tab-btn active" data-category="all">
+      <i class="fas fa-th"></i> Tất cả
+    </button>
+    <button class="tab-btn" data-category="voucher">
+      <i class="fas fa-ticket-alt"></i> Voucher
+    </button>
+    <button class="tab-btn" data-category="product">
+      <i class="fas fa-box"></i> Sản phẩm
+    </button>
+    <button class="tab-btn" data-category="digital">
+      <i class="fas fa-mobile-alt"></i> Thẻ điện tử
+    </button>
+  </div>
+  
+  <div class="toolbar-actions">
+    <button class="btn btn-primary">
+      <i class="fas fa-plus"></i> Thêm phần thưởng mới
+    </button>
+  </div>
+</div>
+
+<!-- Rewards Grid -->
+<div class="rewards-grid">
+  {% for reward in rewards %}
+  <div class="reward-card">
+    <div class="reward-image">
+      <img src="{{ reward.image or 'https://via.placeholder.com/300x200?text=Reward' }}" alt="{{ reward.name }}">
+      {% if reward.is_featured %}
+      <span class="featured-badge">
+        <i class="fas fa-star"></i> Nổi bật
+      </span>
+      {% endif %}
+      {% if reward.stock <= 0 %}
+      <div class="out-of-stock-overlay">
+        <span>Hết hàng</span>
+      </div>
+      {% elif reward.stock < 10 %}
+      <span class="low-stock-badge">
+        <i class="fas fa-exclamation"></i> Sắp hết
+      </span>
+      {% endif %}
+    </div>
+    
+    <div class="reward-content">
+      <div class="reward-category">
+        {% if reward.category == 'voucher' %}
+          <i class="fas fa-ticket-alt"></i> Voucher
+        {% elif reward.category == 'product' %}
+          <i class="fas fa-box"></i> Sản phẩm
+        {% else %}
+          <i class="fas fa-mobile-alt"></i> Thẻ điện tử
+        {% endif %}
+      </div>
+      
+      <h3 class="reward-name">{{ reward.name }}</h3>
+      <p class="reward-description">{{ reward.description }}</p>
+      
+      <div class="reward-price">
+        <i class="fas fa-coins"></i>
+        <strong>{{ reward.points_required }}</strong> điểm
+      </div>
+      
+      <div class="reward-stats">
+        <div class="reward-stat">
+          <i class="fas fa-box-open"></i>
+          <span>Còn: {{ reward.stock }}</span>
+        </div>
+        <div class="reward-stat">
+          <i class="fas fa-fire"></i>
+          <span>Đã đổi: {{ reward.redeemed_count }}</span>
+        </div>
+      </div>
+      
+      <div class="reward-actions">
+        <button class="btn btn-sm btn-primary">
+          <i class="fas fa-edit"></i> Sửa
+        </button>
+        <button class="btn btn-sm btn-secondary">
+          <i class="fas fa-eye"></i> Chi tiết
+        </button>
+        <button class="btn btn-sm btn-danger">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Recent Redemptions -->
+<div class="section-divider">
+  <h2><i class="fas fa-history"></i> Lịch sử đổi quà gần đây</h2>
+</div>
+
+<div class="data-table-card">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Thời gian</th>
+        <th>Người dùng</th>
+        <th>Phần thưởng</th>
+        <th>Điểm sử dụng</th>
+        <th>Trạng thái</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for redemption in recent_redemptions %}
+      <tr>
+        <td>{{ redemption.created_at }}</td>
+        <td>
+          <div class="user-cell">
+            <img src="{{ redemption.user_avatar }}" alt="{{ redemption.user_name }}">
+            <strong>{{ redemption.user_name }}</strong>
+          </div>
+        </td>
+        <td>{{ redemption.reward_name }}</td>
+        <td>
+          <strong class="text-primary">{{ redemption.points_used }} điểm</strong>
+        </td>
+        <td>
+          <span class="status-badge {{ redemption.status }}">
+            {{ redemption.status_text }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-primary">
+            <i class="fas fa-check"></i> Xác nhận
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

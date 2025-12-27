@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Admin Dashboard{% endblock %} - Green Spring</title>
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  
+  <!-- Admin CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+  
+  
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  
+  <!-- ========== SIDEBAR ========== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>Green Spring</span>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a href="{{ url_for('admin_dashboard') }}" class="{% if request.endpoint == 'admin_dashboard' %}active{% endif %}">
+            <i class="fas fa-chart-line"></i>
+            <span>Tổng quan</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="{{ url_for('admin_users') }}" class="{% if request.endpoint == 'admin_users' %}active{% endif %}">
+            <i class="fas fa-users"></i>
+            <span>Người dùng</span>
+            <span class="badge">{{ total_users or 15 }}</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="{{ url_for('admin_rankings') }}" class="{% if request.endpoint == 'admin_rankings' %}active{% endif %}">
+            <i class="fas fa-trophy"></i>
+            <span>Bảng xếp hạng</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="{{ url_for('admin_rewards') }}" class="{% if request.endpoint == 'admin_rewards' %}active{% endif %}">
+            <i class="fas fa-gift"></i>
+            <span>Phần thưởng</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="{{ url_for('admin_badges') }}" class="{% if request.endpoint == 'admin_badges' %}active{% endif %}">
+            <i class="fas fa-medal"></i>
+            <span>Huy hiệu</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="{{ url_for('admin_statistics') }}" class="{% if request.endpoint == 'admin_statistics' %}active{% endif %}">
+            <i class="fas fa-chart-bar"></i>
+            <span>Thống kê</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="{{ url_for('admin_campaigns') }}" class="{% if request.endpoint == 'admin_campaigns' %}active{% endif %}">
+            <i class="fas fa-bullhorn"></i>
+            <span>Chiến dịch</span>
+          </a>
+        </li>
+        
+        <li>
+          <a href="{{ url_for('admin_collection_points') }}" class="{% if request.endpoint == 'admin_collection_points' %}active{% endif %}">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Điểm thu gom</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    
+    <div class="sidebar-footer">
+      <div class="admin-profile">
+        <img src="https://ui-avatars.com/api/?name=Admin&background=5865F2&color=fff" alt="Admin">
+        <div class="admin-info">
+          <span class="admin-name">{{ current_user.name or 'Admin' }}</span>
+          <span class="admin-role">Quản trị viên</span>
+        </div>
+      </div>
+      <a href="{{ url_for('logout') }}" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Đăng xuất</span>
+      </a>
+    </div>
+  </aside>
+  
+  <!-- ========== MAIN CONTENT ========== -->
+  <div class="main-content" id="mainContent">
+    
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="mobile-toggle" id="mobileToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+        <!-- KHÔNG dùng block page_title trong topbar -->
+<div class="breadcrumb">
+  <i class="fas fa-home"></i>
+  <span>Admin</span>
+  <i class="fas fa-chevron-right"></i>
+  <span>{% block page_name %}Dashboard{% endblock %}</span>
+</div>
+
+      </div>
+      
+      <div class="topbar-right">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-sun"></i>
+          <i class="fas fa-moon"></i>
+        </button>
+        
+        <!-- Notifications -->
+        <div class="notifications">
+          <button class="notification-btn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">5</span>
+          </button>
+        </div>
+        
+        <!-- Quick Actions -->
+        <a href="{{ url_for('index') }}" class="btn-icon" title="Xem trang chính">
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </header>
+    
+    <!-- Page Content -->
+    <main class="page-content">
+      {% block content %}{% endblock %}
+    </main>
+    
+  </div>
+  
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+  {% block extra_js %}{% endblock %}
+  
+</body>
+</html>
