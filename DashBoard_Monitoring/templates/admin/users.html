@@ -1,0 +1,398 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Quản lý người dùng{% endblock %}
+{% block page_name %}Người dùng{% endblock %}
+
+{% block content %}
+
+<!-- ⭐ DATA GIẢ - ĐÃ FIX FORMAT NGÀY ⭐ -->
+{% set fake_users = [
+  {'id': 1, 'name': 'Nguyễn Văn An', 'email': 'nguyenvanan@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/men/32.jpg', 'points': 2450, 'total_kg': 45.8, 'rank': 1, 'is_active': True, 'is_vip': True, 'created_at': '15/01/2024'},
+  {'id': 2, 'name': 'Trần Thị Bảo', 'email': 'tranthibao@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/women/44.jpg', 'points': 2180, 'total_kg': 42.3, 'rank': 2, 'is_active': True, 'is_vip': True, 'created_at': '20/01/2024'},
+  {'id': 3, 'name': 'Lê Minh Chiến', 'email': 'leminhchien@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/men/54.jpg', 'points': 1890, 'total_kg': 38.9, 'rank': 3, 'is_active': True, 'is_vip': False, 'created_at': '05/02/2024'},
+  {'id': 4, 'name': 'Phạm Thu Duyên', 'email': 'phamthuduyen@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/women/68.jpg', 'points': 1654, 'total_kg': 35.2, 'rank': 4, 'is_active': True, 'is_vip': False, 'created_at': '12/02/2024'},
+  {'id': 5, 'name': 'Hoàng Minh Em', 'email': 'hoangminhem@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/men/75.jpg', 'points': 1523, 'total_kg': 32.7, 'rank': 5, 'is_active': True, 'is_vip': False, 'created_at': '18/02/2024'},
+  {'id': 6, 'name': 'Vũ Thị Phương', 'email': 'vuthiphuong@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/women/28.jpg', 'points': 1420, 'total_kg': 29.4, 'rank': 6, 'is_active': True, 'is_vip': False, 'created_at': '01/03/2024'},
+  {'id': 7, 'name': 'Đỗ Văn Gia', 'email': 'dovangia@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/men/62.jpg', 'points': 1298, 'total_kg': 27.8, 'rank': 7, 'is_active': True, 'is_vip': False, 'created_at': '08/03/2024'},
+  {'id': 8, 'name': 'Ngô Thu Hà', 'email': 'ngothuha@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/women/52.jpg', 'points': 1156, 'total_kg': 25.1, 'rank': 8, 'is_active': False, 'is_vip': False, 'created_at': '15/03/2024'},
+  {'id': 9, 'name': 'Bùi Văn Inh', 'email': 'buivaninh@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/men/45.jpg', 'points': 1089, 'total_kg': 23.6, 'rank': 9, 'is_active': True, 'is_vip': False, 'created_at': '22/03/2024'},
+  {'id': 10, 'name': 'Lý Thị Khánh', 'email': 'lythikhanh@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/women/65.jpg', 'points': 945, 'total_kg': 21.3, 'rank': 10, 'is_active': True, 'is_vip': False, 'created_at': '01/04/2024'},
+  {'id': 11, 'name': 'Trịnh Văn Long', 'email': 'trinhvanlong@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/men/88.jpg', 'points': 892, 'total_kg': 19.7, 'rank': 11, 'is_active': True, 'is_vip': False, 'created_at': '08/04/2024'},
+  {'id': 12, 'name': 'Đinh Thị Mai', 'email': 'dinhthimai@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/women/38.jpg', 'points': 834, 'total_kg': 18.2, 'rank': 12, 'is_active': False, 'is_vip': False, 'created_at': '15/04/2024'},
+  {'id': 13, 'name': 'Phan Văn Nam', 'email': 'phanvannam@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/men/72.jpg', 'points': 756, 'total_kg': 16.8, 'rank': 13, 'is_active': True, 'is_vip': False, 'created_at': '22/04/2024'},
+  {'id': 14, 'name': 'Hồ Thị Oanh', 'email': 'hothioanh@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/women/82.jpg', 'points': 698, 'total_kg': 15.4, 'rank': 14, 'is_active': True, 'is_vip': False, 'created_at': '01/05/2024'},
+  {'id': 15, 'name': 'Võ Văn Phong', 'email': 'vovanphong@gmail.com', 'avatar': 'https://randomuser.me/api/portraits/men/58.jpg', 'points': 623, 'total_kg': 14.1, 'rank': 15, 'is_active': False, 'is_vip': False, 'created_at': '08/05/2024'}
+] %}
+
+{% set users = fake_users %}
+
+<!-- ============================================
+     PAGE HEADER
+     ============================================ -->
+<div class="page-header">
+  <div>
+    <h1>👥 Quản lý người dùng</h1>
+    <p class="subtitle">Quản lý và theo dõi hoạt động của {{ users|length }} người dùng trong hệ thống</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn-export" onclick="exportUsers()">
+      <i class="fas fa-download"></i> Xuất Excel
+    </button>
+    <button class="btn-primary" onclick="openAddUserModal()">
+      <i class="fas fa-user-plus"></i> Thêm người dùng
+    </button>
+  </div>
+</div>
+
+<!-- ============================================
+     STATS CARDS - QUICK OVERVIEW
+     ============================================ -->
+<div class="users-stats-grid">
+  <div class="stat-card-mini">
+    <div class="stat-mini-icon" style="background: linear-gradient(135deg, #5865F2, #7289DA);">
+      <i class="fas fa-users"></i>
+    </div>
+    <div class="stat-mini-content">
+      <h3>{{ users|length }}</h3>
+      <p>Tổng người dùng</p>
+      <span class="stat-mini-change positive">
+        <i class="fas fa-arrow-up"></i> +12.5%
+      </span>
+    </div>
+  </div>
+
+  <div class="stat-card-mini">
+    <div class="stat-mini-icon" style="background: linear-gradient(135deg, #10B981, #34D399);">
+      <i class="fas fa-user-check"></i>
+    </div>
+    <div class="stat-mini-content">
+      <h3>{{ users|selectattr('is_active')|list|length }}</h3>
+      <p>Đang hoạt động</p>
+      <span class="stat-mini-change positive">
+        <i class="fas fa-arrow-up"></i> +8.2%
+      </span>
+    </div>
+  </div>
+
+  <div class="stat-card-mini">
+    <div class="stat-mini-icon" style="background: linear-gradient(135deg, #F59E0B, #FCD34D);">
+      <i class="fas fa-crown"></i>
+    </div>
+    <div class="stat-mini-content">
+      <h3>{{ users|selectattr('is_vip')|list|length }}</h3>
+      <p>Thành viên VIP</p>
+      <span class="stat-mini-change neutral">
+        <i class="fas fa-minus"></i> 0%
+      </span>
+    </div>
+  </div>
+
+  <div class="stat-card-mini">
+    <div class="stat-mini-icon" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);">
+      <i class="fas fa-user-plus"></i>
+    </div>
+    <div class="stat-mini-content">
+      <h3>24</h3>
+      <p>Mới trong tuần</p>
+      <span class="stat-mini-change positive">
+        <i class="fas fa-arrow-up"></i> +15.3%
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     FILTERS & SEARCH TOOLBAR
+     ============================================ -->
+<div class="users-toolbar">
+  <div class="toolbar-left">
+    <div class="search-box-modern">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Tìm kiếm theo tên, email, ID..." id="userSearch">
+      <button class="search-clear" style="display: none;">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div class="toolbar-right">
+    <select class="filter-select-modern" id="statusFilter">
+      <option value="all">Tất cả trạng thái</option>
+      <option value="active">Hoạt động</option>
+      <option value="inactive">Không hoạt động</option>
+      <option value="vip">Thành viên VIP</option>
+    </select>
+    
+    <select class="filter-select-modern" id="rankFilter">
+      <option value="all">Tất cả hạng</option>
+      <option value="1-10">Top 10</option>
+      <option value="11-50">Top 11-50</option>
+      <option value="51+">51+</option>
+    </select>
+
+    <button class="btn-filter-toggle" onclick="toggleAdvancedFilters()">
+      <i class="fas fa-sliders"></i> Bộ lọc
+    </button>
+  </div>
+</div>
+
+<!-- Advanced Filters (Collapsed by default) -->
+<div class="advanced-filters" id="advancedFilters" style="display: none;">
+  <div class="filter-row">
+    <div class="filter-group">
+      <label>Điểm từ</label>
+      <input type="number" placeholder="0" class="filter-input">
+    </div>
+    <div class="filter-group">
+      <label>Điểm đến</label>
+      <input type="number" placeholder="10000" class="filter-input">
+    </div>
+    <div class="filter-group">
+      <label>Ngày tham gia</label>
+      <input type="date" class="filter-input">
+    </div>
+    <div class="filter-group">
+      <button class="btn-apply-filters">
+        <i class="fas fa-check"></i> Áp dụng
+      </button>
+      <button class="btn-reset-filters">
+        <i class="fas fa-rotate"></i> Đặt lại
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     USERS TABLE
+     ============================================ -->
+<div class="users-table-card">
+  <div class="table-header">
+    <div class="table-header-left">
+      <input type="checkbox" id="selectAll" class="checkbox-modern">
+      <span class="selected-count" style="display: none;">
+        <strong id="selectedCount">0</strong> được chọn
+      </span>
+      <button class="btn-bulk-action" style="display: none;">
+        <i class="fas fa-trash"></i> Xóa
+      </button>
+    </div>
+    <div class="table-header-right">
+      <span class="table-info">
+        Hiển thị <strong>{{ users|length }}</strong> người dùng
+      </span>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th width="40">
+            <input type="checkbox" id="selectAllHeader" class="checkbox-modern">
+          </th>
+          <th>Người dùng</th>
+          <th>Email</th>
+          <th class="text-center">
+            <i class="fas fa-coins" style="color: #F59E0B;"></i> Điểm
+          </th>
+          <th class="text-center">
+            <i class="fas fa-weight-hanging" style="color: #10B981;"></i> Tổng kg
+          </th>
+          <th class="text-center">
+            <i class="fas fa-trophy" style="color: #EF4444;"></i> Hạng
+          </th>
+          <th class="text-center">Trạng thái</th>
+          <th>Ngày tham gia</th>
+          <th width="120" class="text-center">Hành động</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in users %}
+        <tr class="user-row" data-user-id="{{ user.id }}">
+          <td>
+            <input type="checkbox" class="checkbox-modern user-checkbox" value="{{ user.id }}">
+          </td>
+          <td>
+            <div class="user-cell-modern">
+              <div class="user-avatar">
+                <img src="{{ user.avatar }}" alt="{{ user.name }}">
+                {% if user.is_vip %}
+                <span class="vip-badge-tiny">
+                  <i class="fas fa-crown"></i>
+                </span>
+                {% endif %}
+              </div>
+              <div class="user-info">
+                <strong class="user-name">{{ user.name }}</strong>
+                <span class="user-id-tag">ID: {{ user.id }}</span>
+              </div>
+            </div>
+          </td>
+          <td>
+            <span class="email-text">{{ user.email }}</span>
+          </td>
+          <td class="text-center">
+            <span class="points-badge">
+              {{ user.points }}
+            </span>
+          </td>
+          <td class="text-center">
+            <span class="kg-badge">
+              {{ user.total_kg }} kg
+            </span>
+          </td>
+          <td class="text-center">
+            <span class="rank-badge rank-{{ 'gold' if user.rank <= 3 else ('silver' if user.rank <= 10 else 'bronze') }}">
+              #{{ user.rank }}
+            </span>
+          </td>
+          <td class="text-center">
+            <span class="status-badge-modern {{ 'status-active' if user.is_active else 'status-inactive' }}">
+              <i class="fas fa-circle"></i>
+              {{ 'Hoạt động' if user.is_active else 'Không hoạt động' }}
+            </span>
+          </td>
+          <td>
+            <div class="date-cell">
+              <i class="fas fa-calendar-alt"></i>
+              {{ user.created_at }}
+            </div>
+          </td>
+          <td>
+            <div class="action-buttons-modern">
+              <button class="btn-action btn-view" 
+                      data-user-id="{{ user.id }}" 
+                      onclick="viewUser(this)" 
+                      title="Xem chi tiết">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="btn-action btn-edit" 
+                      data-user-id="{{ user.id }}" 
+                      onclick="editUser(this)" 
+                      title="Chỉnh sửa">
+                <i class="fas fa-edit"></i>
+              </button>
+              <button class="btn-action btn-delete" 
+                      data-user-id="{{ user.id }}" 
+                      onclick="deleteUser(this)" 
+                      title="Xóa">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="9" class="no-data">
+            <div class="empty-state">
+              <i class="fas fa-users-slash"></i>
+              <h3>Không có người dùng nào</h3>
+              <p>Hãy thêm người dùng đầu tiên của bạn!</p>
+              <button class="btn-primary" onclick="openAddUserModal()">
+                <i class="fas fa-user-plus"></i> Thêm người dùng
+              </button>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="table-pagination">
+    <div class="pagination-info">
+      Hiển thị <strong>1-{{ users|length }}</strong> trong tổng số <strong>{{ users|length }}</strong>
+    </div>
+    <div class="pagination-controls">
+      <button class="btn-pagination" disabled>
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="btn-pagination active">1</button>
+      <button class="btn-pagination">2</button>
+      <button class="btn-pagination">3</button>
+      <button class="btn-pagination">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Search functionality
+document.getElementById('userSearch').addEventListener('input', function(e) {
+  const searchTerm = e.target.value.toLowerCase();
+  const rows = document.querySelectorAll('.user-row');
+  
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(searchTerm) ? '' : 'none';
+  });
+  
+  document.querySelector('.search-clear').style.display = searchTerm ? 'block' : 'none';
+});
+
+// Clear search
+document.querySelector('.search-clear').addEventListener('click', function() {
+  document.getElementById('userSearch').value = '';
+  document.querySelectorAll('.user-row').forEach(row => row.style.display = '');
+  this.style.display = 'none';
+});
+
+// Select all checkboxes
+document.getElementById('selectAll').addEventListener('change', function() {
+  const checkboxes = document.querySelectorAll('.user-checkbox');
+  checkboxes.forEach(cb => cb.checked = this.checked);
+  updateBulkActions();
+});
+
+// Update bulk actions visibility
+function updateBulkActions() {
+  const checked = document.querySelectorAll('.user-checkbox:checked').length;
+  document.getElementById('selectedCount').textContent = checked;
+  document.querySelector('.selected-count').style.display = checked > 0 ? 'inline' : 'none';
+  document.querySelector('.btn-bulk-action').style.display = checked > 0 ? 'inline-flex' : 'none';
+}
+
+document.querySelectorAll('.user-checkbox').forEach(cb => {
+  cb.addEventListener('change', updateBulkActions);
+});
+
+// Toggle advanced filters
+function toggleAdvancedFilters() {
+  const filters = document.getElementById('advancedFilters');
+  filters.style.display = filters.style.display === 'none' ? 'block' : 'none';
+}
+
+// ⭐ SỬA LẠI - DÙNG DATA ATTRIBUTES
+function viewUser(button) {
+  const userId = button.getAttribute('data-user-id');
+  window.location.href = `/admin/users/${userId}`;
+}
+
+function editUser(button) {
+  const userId = button.getAttribute('data-user-id');
+  alert(`Chỉnh sửa người dùng #${userId}`);
+}
+
+function deleteUser(button) {
+  const userId = button.getAttribute('data-user-id');
+  if (confirm('Bạn có chắc muốn xóa người dùng này?')) {
+    alert(`Đã xóa người dùng #${userId}`);
+  }
+}
+
+function exportUsers() {
+  alert('Đang xuất danh sách người dùng...');
+}
+
+function openAddUserModal() {
+  alert('Mở form thêm người dùng');
+}
+
+console.log('✅ Users management page initialized!');
+</script>
+{% endblock %}

@@ -131,4 +131,3 @@ src/
 
 - Liên hệ trưởng nhóm để nhận API key
 - API 키를 받으려면 팀 리더에게 연락하세요
-
